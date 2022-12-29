@@ -42,6 +42,7 @@ public class GuiMainMenu extends GuiScreen implements GuiYesNoCallback {
 
         this.addSingleplayerMultiplayerButtons(j, 24);
 
+
         this.buttonList.add(new GuiButton(0, this.width / 2 - 100, j + 72 + 12, 98, 20, I18n.format("menu.options")));
         this.buttonList.add(new GuiButton(4, this.width / 2 + 2, j + 72 + 12, 98, 20, I18n.format("menu.quit")));
         this.buttonList.add(new GuiButtonLanguage(5, this.width / 2 - 124, j + 72 + 12));
@@ -94,12 +95,11 @@ public class GuiMainMenu extends GuiScreen implements GuiYesNoCallback {
         GL11.glScaled(scale, scale, 1);
 
         Wrapper.getMinecraftFontRenderer().drawStringWithShadow(RadiumClient.NAME,
-                textX, textHeight, Colors.RED);
+                textX, textHeight, Colors.DEEP_PURPLE);
 
         GL11.glScaled(1 / scale, 1 / scale, 1);
 
 //        ChangeLogUtils.drawChangeLog();
-
-        super.drawScreen(mouseX, mouseY, partialTicks);
+super.drawScreen(mouseX, mouseY, partialTicks);
     }
 }

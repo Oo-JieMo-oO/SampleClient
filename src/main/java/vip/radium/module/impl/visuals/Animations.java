@@ -15,7 +15,7 @@ public final class Animations extends Module {
     public final Property<Boolean> equipProgressProperty = new Property<>("Equip Prog", true);
     public final DoubleProperty equipProgMultProperty = new DoubleProperty("E-Prog Multiplier", 2,
             equipProgressProperty::getValue, 0.5, 3.0, 0.1);
-    public final DoubleProperty itemScale = new DoubleProperty("Item Scale", 0.7, 0.0, 2.0, 0.05);
+    public final DoubleProperty itemScale = new DoubleProperty("Item Scale", 1, 0.0, 2.0, 0.05);
     public final DoubleProperty swingSpeed = new DoubleProperty("Swing Duration", 1.0, 0.1, 2.0, 0.1);
     public final DoubleProperty xPosProperty = new DoubleProperty("X", 0.0, -1, 1, 0.05);
     public final DoubleProperty yPosProperty = new DoubleProperty("Y", 0.0, -1, 1, 0.05);

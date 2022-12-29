@@ -59,6 +59,7 @@ public final class ModuleManager {
                 new Chams(),
                 new ESP(),
                 new Animations(),
+
                 new BetterChat(),
                 new WorldColor(),
                 new Camera(),
