@@ -4,6 +4,7 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.client.entity.EntityPlayerSP;
 import net.minecraft.client.gui.Gui;
 import net.minecraft.client.gui.ScaledResolution;
+import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.Tessellator;
 import net.minecraft.client.renderer.WorldRenderer;
 import net.minecraft.client.renderer.culling.Frustum;
@@ -79,7 +80,7 @@ public final class RenderingUtils {
         int height = Display.getHeight();
 
         if (width != lastWidth ||
-            height != lastHeight) {
+                height != lastHeight) {
             lastWidth = width;
             lastHeight = height;
             return lockedResolution = new LockedResolution(width / LockedResolution.SCALE_FACTOR, height / LockedResolution.SCALE_FACTOR);
@@ -94,8 +95,8 @@ public final class RenderingUtils {
         int guiScale = Wrapper.getGameSettings().guiScale;
 
         if (displayWidth != lastScaledWidth ||
-            displayHeight != lastScaledHeight ||
-            guiScale != lastGuiScale) {
+                displayHeight != lastScaledHeight ||
+                guiScale != lastGuiScale) {
             lastScaledWidth = displayWidth;
             lastScaledHeight = displayHeight;
             lastGuiScale = guiScale;
@@ -117,9 +118,9 @@ public final class RenderingUtils {
         int b = rainbow & 0xFF;
         int a = (int) (alpha * 255.0F);
         return ((a & 0xFF) << 24) |
-            ((r & 0xFF) << 16) |
-            ((g & 0xFF) << 8) |
-            (b & 0xFF);
+                ((r & 0xFF) << 16) |
+                ((g & 0xFF) << 8) |
+                (b & 0xFF);
     }
 
     public static int getRainbow(long currentMillis, int speed, int offset) {
@@ -128,15 +129,15 @@ public final class RenderingUtils {
 
     public static int getRainbow(long currentMillis, int speed, int offset, float alpha) {
         int rainbow = Color.HSBtoRGB(1.0F - ((currentMillis + (offset * 100)) % speed) / (float) speed,
-                                     0.9F, 0.9F);
+                0.9F, 0.9F);
         int r = (rainbow >> 16) & 0xFF;
         int g = (rainbow >> 8) & 0xFF;
         int b = rainbow & 0xFF;
         int a = (int) (alpha * 255.0F);
         return ((a & 0xFF) << 24) |
-            ((r & 0xFF) << 16) |
-            ((g & 0xFF) << 8) |
-            (b & 0xFF);
+                ((r & 0xFF) << 16) |
+                ((g & 0xFF) << 8) |
+                (b & 0xFF);
     }
 
     public static void drawAndRotateArrow(float x, float y, float size, boolean rotate) {
@@ -171,7 +172,7 @@ public final class RenderingUtils {
 
         if (dif > 0) {
             double animationSpeed = MathUtils.roundToDecimalPlace(Math.min(
-                10.0D, Math.max(0.05D, (144.0D / fps) * (dif / 10) * speed)), 0.05D);
+                    10.0D, Math.max(0.05D, (144.0D / fps) * (dif / 10) * speed)), 0.05D);
 
             if (dif != 0 && dif < animationSpeed)
                 animationSpeed = dif;
@@ -192,7 +193,7 @@ public final class RenderingUtils {
 
         if (dif > 0) {
             double animationSpeed = MathUtils.roundToDecimalPlace(Math.min(
-                10.0D, Math.max(0.005D, (144.0D / fps) * speed)), 0.005D);
+                    10.0D, Math.max(0.005D, (144.0D / fps) * speed)), 0.005D);
 
             if (dif != 0 && dif < animationSpeed)
                 animationSpeed = dif;
@@ -225,9 +226,9 @@ public final class RenderingUtils {
 
 
         return ((r & 0xFF) << 16) |
-            ((g & 0xFF) << 8) |
-            (b & 0xFF) |
-            ((a & 0xFF) << 24);
+                ((g & 0xFF) << 8) |
+                (b & 0xFF) |
+                ((a & 0xFF) << 24);
     }
 
     public static int darker(final int color, final float factor) {
@@ -254,7 +255,54 @@ public final class RenderingUtils {
         fr.drawString(s, x, y + 0.5F, outlineColor);
         fr.drawString(s, x, y, color);
     }
+    public static void drawModalRectWithCustomSizedTexture(float x, float y, float u, float v, float width, float height, float textureWidth, float textureHeight) {
+        float f = 1.0F / textureWidth;
+        float f1 = 1.0F / textureHeight;
+        Tessellator tessellator = Tessellator.getInstance();
+        WorldRenderer worldrenderer = tessellator.getWorldRenderer();
+        worldrenderer.begin(7, DefaultVertexFormats.POSITION_TEX);
+        worldrenderer.pos(x, y + height, 0.0D).tex(u * f, (v + (float) height) * f1).endVertex();
+        worldrenderer.pos(x + width, y + height, 0.0D).tex((u + (float) width) * f, (v + (float) height) * f1).endVertex();
+        worldrenderer.pos(x + width, y, 0.0D).tex((u + (float) width) * f, v * f1).endVertex();
+        worldrenderer.pos(x, y, 0.0D).tex(u * f, v * f1).endVertex();
+        tessellator.draw();
+    }
+    public static void drawTexturedRectWithCustomAlpha(float x, float y, float width, float height, String image, float alpha) {
+        glPushMatrix();
+        final boolean enableBlend = glIsEnabled(GL_BLEND);
+        final boolean disableAlpha = !glIsEnabled(GL_ALPHA_TEST);
+        if(!enableBlend) glEnable(GL_BLEND);
+        if(!disableAlpha) glDisable(GL_ALPHA_TEST);
+        GlStateManager.color(1F, 1F, 1F, alpha);
+        Minecraft.getMinecraft().getTextureManager().bindTexture(new ResourceLocation("radium/shadow/" + image + ".png"));
+        drawModalRectWithCustomSizedTexture(x, y, 0, 0, width, height, width, height);
+        if(!enableBlend) glDisable(GL_BLEND);
+        if(!disableAlpha) glEnable(GL_ALPHA_TEST);
+        GlStateManager.resetColor();
+        glPopMatrix();
+    }
 
+
+    public static void stopDrawing() {
+        GL11.glDisable(3042);
+        GL11.glEnable(3553);
+        GL11.glDisable(2848);
+        GL11.glDisable(3042);
+        GL11.glEnable(2929);
+    }
+    public static double easeInQuart(Double x) {
+        return x * x * x * x;
+    }
+    public static void drawShadowWithCustomAlpha(float x, float y, float width, float height, float alpha) {
+        drawTexturedRectWithCustomAlpha(x - 9, y - 9, 9, 9, "paneltopleft", alpha);
+        drawTexturedRectWithCustomAlpha(x - 9, y + height, 9, 9, "panelbottomleft", alpha);
+        drawTexturedRectWithCustomAlpha(x + width, y + height, 9, 9, "panelbottomright", alpha);
+        drawTexturedRectWithCustomAlpha(x + width, y - 9, 9, 9, "paneltopright", alpha);
+        drawTexturedRectWithCustomAlpha(x - 9, y, 9, height, "panelleft", alpha);
+        drawTexturedRectWithCustomAlpha(x + width, y, 9, height, "panelright", alpha);
+        drawTexturedRectWithCustomAlpha(x, y - 9, width, 9, "paneltop", alpha);
+        drawTexturedRectWithCustomAlpha(x, y + height, width, 9, "panelbottom", alpha);
+    }
     public static void drawImage(float x,
                                  float y,
                                  float width,
@@ -271,17 +319,17 @@ public final class RenderingUtils {
         WorldRenderer worldrenderer = tessellator.getWorldRenderer();
         worldrenderer.begin(7, DefaultVertexFormats.POSITION_TEX);
         worldrenderer.pos(x, y + height, 0.0D)
-            .tex(0.0D, height * f1)
-            .endVertex();
+                .tex(0.0D, height * f1)
+                .endVertex();
         worldrenderer.pos(x + width, y + height, 0.0D)
-            .tex(width * f, height * f1)
-            .endVertex();
+                .tex(width * f, height * f1)
+                .endVertex();
         worldrenderer.pos(x + width, y, 0.0D)
-            .tex(width * f, 0.0D)
-            .endVertex();
+                .tex(width * f, 0.0D)
+                .endVertex();
         worldrenderer.pos(x, y, 0.0D)
-            .tex(0.0D, 0.0D)
-            .endVertex();
+                .tex(0.0D, 0.0D)
+                .endVertex();
         tessellator.draw();
     }
 

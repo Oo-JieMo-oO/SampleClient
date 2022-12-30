@@ -21,7 +21,7 @@ import vip.radium.utils.*;
 @ModuleInfo(label = "Speed", category = ModuleCategory.MOVEMENT)
 public final class Speed extends Module {
 
-    private final EnumProperty<SpeedMode> speedModeProperty = new EnumProperty<>("Mode", SpeedMode.WATCHDOGE);
+    private final EnumProperty<SpeedMode> speedModeProperty = new EnumProperty<>("Mode", SpeedMode.WATCHDOG);
     private final EnumProperty<FrictionMode> frictionModeProperty = new EnumProperty<>("Friction Mode", FrictionMode.NCP,
             this::isWatchdog);
     private final Property<Boolean> glideProperty = new Property<>("Glide", false);
@@ -82,7 +82,7 @@ public final class Speed extends Module {
     @EventLink(EventBusPriorities.LOWEST)
     public final Listener<MoveEntityEvent> onMoveEntityEvent = e -> {
         switch (speedModeProperty.getValue()) {
-            case WATCHDOGE:
+            case WATCHDOG:
                 if (MovementUtils.isMoving()) {
                     final double lastDist = PlayerInfoCache.getLastDist();
                     double baseMoveSpeed = PlayerInfoCache.getBaseMoveSpeed();
@@ -165,7 +165,7 @@ public final class Speed extends Module {
     }
 
     private boolean isWatchdog() {
-        return speedModeProperty.getValue() == SpeedMode.WATCHDOGE;
+        return speedModeProperty.getValue() == SpeedMode.WATCHDOG;
     }
 
     private boolean isCustomSpeed() {
@@ -177,6 +177,6 @@ public final class Speed extends Module {
     }
 
     private enum SpeedMode {
-        WATCHDOGE, CUSTOM
+        WATCHDOG, CUSTOM
     }
 }
