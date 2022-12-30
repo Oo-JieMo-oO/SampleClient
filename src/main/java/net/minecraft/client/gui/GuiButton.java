@@ -100,7 +100,7 @@ public class GuiButton extends Gui
                 GL11.glPushMatrix();
                 OGLUtils.enableBlending();
                 GL11.glDisable(GL11.GL_TEXTURE_2D);
-                OGLUtils.color(Colors.DEEP_PURPLE);
+                OGLUtils.color(Colors.WHITE);
                 GL11.glTranslatef(this.xPosition, this.yPosition, 0.0F);
                 GL11.glLineWidth(1.0F);
                 GL11.glBegin(GL11.GL_LINE_LOOP);
