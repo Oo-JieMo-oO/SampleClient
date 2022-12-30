@@ -94,7 +94,7 @@ public class GuiMainMenu extends GuiScreen implements GuiYesNoCallback {
         GL11.glScaled(scale, scale, 1);
 
         Wrapper.getMinecraftFontRenderer().drawStringWithShadow(RadiumClient.NAME,
-                textX, textHeight, Colors.RED);
+                textX, textHeight, Colors.DEEP_PURPLE);
 
         GL11.glScaled(1 / scale, 1 / scale, 1);
 
