@@ -94,15 +94,13 @@ public class GuiButton extends Gui
 //            GlStateManager.blendFunc(770, 771);
 //            Gui.drawTexturedModalRect(this.xPosition, this.yPosition, 0, 46 + i * 20, this.width / 2, this.height);
 //            Gui.drawTexturedModalRect(this.xPosition + this.width / 2, this.yPosition, 200 - this.width / 2, 46 + i * 20, this.width / 2, this.height);
-            Color color = new Color(0, 0, 0, 90);
-            int radius = 2;
-            RoundedUtil.drawRound(xPosition,yPosition, width ,
-                    height,radius, color);
+
+            Gui.drawRect(this.xPosition, this.yPosition, this.xPosition + this.width, this.yPosition + this.height, 0x78000000);
             if (hovered && enabled) {
                 GL11.glPushMatrix();
                 OGLUtils.enableBlending();
                 GL11.glDisable(GL11.GL_TEXTURE_2D);
-                OGLUtils.color(Colors.WHITE);
+                OGLUtils.color(Colors.DEEP_PURPLE);
                 GL11.glTranslatef(this.xPosition, this.yPosition, 0.0F);
                 GL11.glLineWidth(1.0F);
                 GL11.glBegin(GL11.GL_LINE_LOOP);
