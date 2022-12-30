@@ -290,6 +290,9 @@ public final class RenderingUtils {
         GL11.glDisable(3042);
         GL11.glEnable(2929);
     }
+    public static double easeInQuart(Double x) {
+        return x * x * x * x;
+    }
     public static void drawShadowWithCustomAlpha(float x, float y, float width, float height, float alpha) {
         drawTexturedRectWithCustomAlpha(x - 9, y - 9, 9, 9, "paneltopleft", alpha);
         drawTexturedRectWithCustomAlpha(x - 9, y + height, 9, 9, "panelbottomleft", alpha);
