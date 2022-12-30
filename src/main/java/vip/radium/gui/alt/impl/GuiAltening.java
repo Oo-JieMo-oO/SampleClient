@@ -36,7 +36,7 @@ public final class GuiAltening extends GuiAltScreen {
 
         final int middleX = width / 2 - (buttonWidth / 2);
         final int middleY = height / 4 + 48;
-        this.tokenField = new GuiTextField(3, FontLoaders.F18,
+        this.tokenField = new GuiTextField(3, FontLoaders.F17,
                 "API Key", middleX, middleY, buttonWidth, buttonHeight - margin);
 
         this.textFields.add(tokenField);

@@ -36,9 +36,9 @@ public final class GuiDirectLogin extends GuiAltScreen {
 
         final int middleX = width / 2 - (buttonWidth / 2);
         final int middleY = height / 4 + 48;
-        this.emailField = new GuiTextField(3, FontLoaders.F18,
+        this.emailField = new GuiTextField(3, FontLoaders.F17,
                 "Email", middleX, middleY, buttonWidth, buttonHeight - margin);
-        this.passwordField = new GuiTextField(4, FontLoaders.F18,
+        this.passwordField = new GuiTextField(4, FontLoaders.F17,
                 "Password", middleX, middleY + offset, buttonWidth, buttonHeight - margin);
 
         this.textFields.add(emailField);

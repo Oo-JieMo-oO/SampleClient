@@ -16,6 +16,7 @@ import org.lwjgl.opengl.GL11;
 import vip.radium.gui.font.FontRenderer;
 import vip.radium.utils.MathUtils;
 import vip.radium.utils.Wrapper;
+import vip.xiatian.StaticStorage;
 
 import java.awt.*;
 
@@ -26,7 +27,7 @@ public final class RenderingUtils {
     private static final double DOUBLE_PI = Math.PI * 2.0D;
 
     private static final Frustum FRUSTUM = new Frustum();
-
+    public static int deltaTime;
     private static int lastScaledWidth;
     private static int lastScaledHeight;
     private static int lastGuiScale;
@@ -44,7 +45,61 @@ public final class RenderingUtils {
         FRUSTUM.setPosition(player.posX, player.posY, player.posZ);
         return FRUSTUM.isBoundingBoxInFrustum(aabb);
     }
+    public static void makeScissorBox(final float x, final float y, final float x2, final float y2) {
+        makeScissorBox(x, y, x2, y2, 1);
+    }
+    private static void quickPolygonCircle(float x, float y, float xRadius, float yRadius, int start, int end, int split) {
+        for(int i = end; i >= start; i -= split) {
+            glVertex2d(x + Math.sin(i * Math.PI / 180.0D) * xRadius, y + Math.cos(i * Math.PI / 180.0D) * yRadius);
+        }
+    }
+    public static void glColor(final int hex) {
+        final float alpha = (hex >> 24 & 0xFF) / 255F;
+        final float red = (hex >> 16 & 0xFF) / 255F;
+        final float green = (hex >> 8 & 0xFF) / 255F;
+        final float blue = (hex & 0xFF) / 255F;
 
+        GlStateManager.color(red, green, blue, alpha);
+    }
+    public static void setGlState(final int cap, final boolean state) {
+        if (state)
+            glEnable(cap);
+        else
+            glDisable(cap);
+    }
+    public static void drawRoundedCornerRect(float x, float y, float x1, float y1, float radius, int color) {
+        glEnable(GL_BLEND);
+        glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+        glDisable(GL_TEXTURE_2D);
+        final boolean hasCull = glIsEnabled(GL_CULL_FACE);
+        glDisable(GL_CULL_FACE);
+
+        glColor(color);
+        drawRoundedCornerRect(x, y, x1, y1, radius);
+
+        glEnable(GL_TEXTURE_2D);
+        glDisable(GL_BLEND);
+        setGlState(GL_CULL_FACE, hasCull);
+    }
+
+    public static void drawRoundedCornerRect(float x, float y, float x1, float y1, float radius) {
+        glBegin(GL_POLYGON);
+
+        float xRadius = (float) Math.min((x1 - x) * 0.5, radius);
+        float yRadius = (float) Math.min((y1 - y) * 0.5, radius);
+        quickPolygonCircle(x + xRadius,y + yRadius, xRadius, yRadius,180,270,4);
+        quickPolygonCircle(x1 - xRadius,y + yRadius, xRadius, yRadius,90,180,4);
+        quickPolygonCircle(x1 - xRadius,y1 - yRadius, xRadius, yRadius,0,90,4);
+        quickPolygonCircle(x + xRadius,y1 - yRadius, xRadius, yRadius,270,360,4);
+
+        glEnd();
+    }
+
+    public static void makeScissorBox(final float x, final float y, final float x2, final float y2, final float scaleOffset) {
+        final ScaledResolution scaledResolution = StaticStorage.scaledResolution;
+        final float factor = scaledResolution.getScaleFactor() * scaleOffset;
+        glScissor((int) (x * factor), (int) ((scaledResolution.getScaledHeight() - y2) * factor), (int) ((x2 - x) * factor), (int) ((y2 - y) * factor));
+    }
     public static void drawGradientRect(double left, double top, double right, double bottom,
                                         boolean sideways,
                                         int startColor, int endColor) {

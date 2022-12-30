@@ -274,10 +274,10 @@ public class GuiMultiplayer extends GuiScreen implements GuiYesNoCallback {
      * Draws the screen and all the components in it. Args : mouseX, mouseY, renderPartialTicks
      */
     public void drawScreen(int mouseX, int mouseY, float partialTicks) {
+        drawWorldBackground(0);
         this.hoveringText = null;
-        Gui.drawRect(0, 0, width, height, 0xFF282C34);
         this.serverListSelector.drawScreen(mouseX, mouseY, partialTicks);
-        FontLoaders.F18.drawCenteredString(I18n.format("multiplayer.title"), this.width / 2, 20, Color.WHITE.getRGB());
+        FontLoaders.F17.drawCenteredString(I18n.format("multiplayer.title"), this.width / 2, 20, Color.WHITE.getRGB());
         super.drawScreen(mouseX, mouseY, partialTicks);
 
         if (this.hoveringText != null) {

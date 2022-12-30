@@ -219,7 +219,7 @@ public class GuiOptions extends GuiScreen implements GuiYesNoCallback
     public void drawScreen(int mouseX, int mouseY, float partialTicks)
     {
         this.drawDefaultBackground();
-        FontLoaders.F18.drawCenteredString(this.field_146442_a, this.width / 2, 15, Color.WHITE.getRGB());
+        FontLoaders.F17.drawCenteredString(this.field_146442_a, this.width / 2, 15, Color.WHITE.getRGB());
         super.drawScreen(mouseX, mouseY, partialTicks);
     }
 }

@@ -83,7 +83,7 @@ public class GuiMainMenu extends GuiScreen implements GuiYesNoCallback {
 
 
     public void drawScreen(int mouseX, int mouseY, float partialTicks) {
-        RenderingUtils.drawGuiBackground(width, height);
+        drawBackground(0);
 
         String firstChar = String.valueOf(RadiumClient.NAME.charAt(0));
         String restOfName = RadiumClient.NAME.substring(1);
@@ -105,21 +105,6 @@ public class GuiMainMenu extends GuiScreen implements GuiYesNoCallback {
         float yDiff = ((mouseY - width / 2)- this.currentY) / new ScaledResolution(mc).getScaleFactor();
         this.currentX += xDiff * 0.3f;
         this.currentY += yDiff * 0.3f;
-
-        //BackGround
-        GL11.glTranslated(this.currentX / 30.0f, this.currentY / 15.0f, 0.0f);
-        RenderingUtils.drawImage(-30, -30, width + 60, height + 60, 1.0f, 1.0f, 1.0f, new ResourceLocation("radium/gui/bg.png"));
-        GL11.glTranslated(-this.currentX / 30.0f, -this.currentY / 15.0f, 0.0f);
-
-        //Logi
-        GL11.glScaled(scale, scale, 1);
-//        FontManager.FN_FR.drawStringWithShadow(RadiumClient.NAME, textX, textHeight, Colors.DEEP_PURPLE);
-        Wrapper.getMinecraftFontRenderer().drawStringWithShadow(RadiumClient.NAME,
-                textX, textHeight, Colors.DEEP_PURPLE);
-        GL11.glScaled(1 / scale, 1 / scale, 1);
-
-//        ChangeLogUtils.drawChangeLog();
-
         super.drawScreen(mouseX, mouseY, partialTicks);
     }
 }

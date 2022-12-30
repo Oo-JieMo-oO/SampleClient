@@ -304,7 +304,7 @@ public class MinecraftFontRenderer implements IResourceManagerReloadListener, Fo
 
     @Override
     public int drawStringWithShadow(String text, float x, float y, int color) {
-        return FontLoaders.F18.drawString(text, x, y, color, true);
+        return FontLoaders.F17.drawString(text, x, y, color, true);
     }
 
     /**
@@ -313,7 +313,7 @@ public class MinecraftFontRenderer implements IResourceManagerReloadListener, Fo
 
     @Override
     public int drawString(String text, float x, float y, int color) {
-        return FontLoaders.F18.drawString(text, x, y, color, false);
+        return FontLoaders.F17.drawString(text, x, y, color, false);
     }
 
     /**
@@ -485,7 +485,7 @@ public class MinecraftFontRenderer implements IResourceManagerReloadListener, Fo
     }
 
     public int getStringWidth(String text) {
-        return FontLoaders.F18.getStringWidth(text);
+        return FontLoaders.F17.getStringWidth(text);
     }
 
     /**
@@ -567,7 +567,7 @@ public class MinecraftFontRenderer implements IResourceManagerReloadListener, Fo
      * Trims a string to fit a specified Width.
      */
     public String trimStringToWidth(String text, int width) {
-        return this.trimStringToWidth(text, width, false);
+        return FontLoaders.F17.trimStringToWidth(text, width, false);
     }
 
     /**

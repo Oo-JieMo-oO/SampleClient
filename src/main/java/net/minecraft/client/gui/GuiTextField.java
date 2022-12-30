@@ -525,8 +525,8 @@ public class GuiTextField extends Gui
                 i -= 4;
             }
 
-            String s = this.fontRendererInstance.trimStringToWidth(this.text.substring(this.lineScrollOffset), this.getWidth(),true);
-            this.setCursorPosition(this.fontRendererInstance.trimStringToWidth(s, i,true).length() + this.lineScrollOffset);
+            String s = this.fontRendererInstance.trimStringToWidth(this.text.substring(this.lineScrollOffset), this.getWidth(),false);
+            this.setCursorPosition(this.fontRendererInstance.trimStringToWidth(s, i,false).length() + this.lineScrollOffset);
         }
     }
 
@@ -547,7 +547,7 @@ public class GuiTextField extends Gui
             int j = this.cursorPosition - this.lineScrollOffset;
             int k = this.selectionEnd - this.lineScrollOffset;
             String s = this.fontRendererInstance.trimStringToWidth(
-                    this.text.substring(this.lineScrollOffset), this.getWidth(),true);
+                    this.text.substring(this.lineScrollOffset), this.getWidth(),false);
             boolean flag = j >= 0 && j <= s.length();
             boolean flag1 = this.isFocused && this.cursorCounter / 6 % 2 == 0 && flag;
             int l = this.enableBackgroundDrawing ? this.xPosition + 4 : this.xPosition;
@@ -774,12 +774,12 @@ public class GuiTextField extends Gui
             }
 
             int j = this.getWidth();
-            String s = this.fontRendererInstance.trimStringToWidth(this.text.substring(this.lineScrollOffset), j,true);
+            String s = this.fontRendererInstance.trimStringToWidth(this.text.substring(this.lineScrollOffset), j,false);
             int k = s.length() + this.lineScrollOffset;
 
             if (p_146199_1_ == this.lineScrollOffset)
             {
-                this.lineScrollOffset -= this.fontRendererInstance.trimStringToWidth(this.text, j, true).length();
+                this.lineScrollOffset -= this.fontRendererInstance.trimStringToWidth(this.text, j, false).length();
             }
 
             if (p_146199_1_ > k)

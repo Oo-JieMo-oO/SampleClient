@@ -32,6 +32,7 @@ import org.lwjgl.input.Mouse;
 import org.lwjgl.opengl.GL11;
 import vip.radium.gui.csgo.SkeetUI;
 import vip.radium.utils.render.RenderingUtils;
+import vip.xiatian.shader.BackgroundShader;
 
 import java.awt.*;
 import java.awt.datatransfer.DataFlavor;
@@ -472,7 +473,6 @@ public abstract class GuiScreen extends Gui implements GuiYesNoCallback {
             j = this.height - Mouse.getEventY() * this.height / this.mc.displayHeight - 1;
         }
         int k = Mouse.getEventButton();
-
         if (Mouse.getEventButtonState()) {
             if (this.mc.gameSettings.touchscreen && this.touchValue++ > 0) {
                 return;
@@ -538,17 +538,16 @@ public abstract class GuiScreen extends Gui implements GuiYesNoCallback {
     public void drawBackground(int tint) {
         GlStateManager.disableLighting();
         GlStateManager.disableFog();
+        BackgroundShader.BACKGROUND_SHADER.startShader();
         Tessellator tessellator = Tessellator.getInstance();
         WorldRenderer worldrenderer = tessellator.getWorldRenderer();
-        this.mc.getTextureManager().bindTexture(optionsBackground);
-        GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
-        float f = 32.0F;
         worldrenderer.begin(7, DefaultVertexFormats.POSITION_TEX_COLOR);
         worldrenderer.pos(0.0D, this.height, 0.0D).tex(0.0D, (float) this.height / 32.0F + (float) tint).color4i(64, 64, 64, 255).endVertex();
         worldrenderer.pos(this.width, this.height, 0.0D).tex((float) this.width / 32.0F, (float) this.height / 32.0F + (float) tint).color4i(64, 64, 64, 255).endVertex();
         worldrenderer.pos(this.width, 0.0D, 0.0D).tex((float) this.width / 32.0F, tint).color4i(64, 64, 64, 255).endVertex();
         worldrenderer.pos(0.0D, 0.0D, 0.0D).tex(0.0D, tint).color4i(64, 64, 64, 255).endVertex();
         tessellator.draw();
+        BackgroundShader.BACKGROUND_SHADER.stopShader();
     }
 
     /**

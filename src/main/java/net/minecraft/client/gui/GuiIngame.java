@@ -256,7 +256,7 @@ public class GuiIngame extends Gui {
                     l = MathHelper.func_181758_c(f2 / 50.0F, 0.7F, 0.6F) & 16777215;
                 }
 
-                FontLoaders.F18.drawString(this.recordPlaying, -FontLoaders.F18.getStringWidth(this.recordPlaying) / 2, -4, l + (l1 << 24 & -16777216));
+                FontLoaders.F17.drawString(this.recordPlaying, -FontLoaders.F17.getStringWidth(this.recordPlaying) / 2, -4, l + (l1 << 24 & -16777216));
                 GlStateManager.disableBlend();
                 GL11.glPopMatrix();
             }
@@ -285,11 +285,11 @@ public class GuiIngame extends Gui {
                 GL11.glPushMatrix();
                 GL11.glScalef(4.0F, 4.0F, 4.0F);
                 int j2 = i2 << 24 & -16777216;
-                FontLoaders.F18.drawString(this.field_175201_x, (float) (-FontLoaders.F18.getStringWidth(this.field_175201_x) / 2), -10.0F, 16777215 | j2, true);
+                FontLoaders.F17.drawString(this.field_175201_x, (float) (-FontLoaders.F17.getStringWidth(this.field_175201_x) / 2), -10.0F, 16777215 | j2, true);
                 GL11.glPopMatrix();
                 GL11.glPushMatrix();
                 GL11.glScalef(2.0F, 2.0F, 2.0F);
-                FontLoaders.F18.drawString(this.field_175200_y, (float) (-FontLoaders.F18.getStringWidth(this.field_175200_y) / 2), 5.0F, 16777215 | j2, true);
+                FontLoaders.F17.drawString(this.field_175200_y, (float) (-FontLoaders.F17.getStringWidth(this.field_175200_y) / 2), 5.0F, 16777215 | j2, true);
                 GL11.glPopMatrix();
                 GlStateManager.disableBlend();
                 GL11.glPopMatrix();
@@ -417,14 +417,14 @@ public class GuiIngame extends Gui {
             }
 
             String s = "" + this.mc.thePlayer.experienceLevel;
-            int l1 = (p_175176_1_.getScaledWidth() - FontLoaders.F18.getStringWidth(s)) / 2;
+            int l1 = (p_175176_1_.getScaledWidth() - FontLoaders.F17.getStringWidth(s)) / 2;
             int i1 = p_175176_1_.getScaledHeight() - 31 - 4;
             int j1 = 0;
-            FontLoaders.F18.drawString(s, l1 + 1, i1, 0);
-            FontLoaders.F18.drawString(s, l1 - 1, i1, 0);
-            FontLoaders.F18.drawString(s, l1, i1 + 1, 0);
-            FontLoaders.F18.drawString(s, l1, i1 - 1, 0);
-            FontLoaders.F18.drawString(s, l1, i1, k1);
+            FontLoaders.F17.drawString(s, l1 + 1, i1, 0);
+            FontLoaders.F17.drawString(s, l1 - 1, i1, 0);
+            FontLoaders.F17.drawString(s, l1, i1 + 1, 0);
+            FontLoaders.F17.drawString(s, l1, i1 - 1, 0);
+            FontLoaders.F17.drawString(s, l1, i1, k1);
         }
     }
 
@@ -436,7 +436,7 @@ public class GuiIngame extends Gui {
                 s = EnumChatFormatting.ITALIC + s;
             }
 
-            int i = (p_181551_1_.getScaledWidth() - FontLoaders.F18.getStringWidth(s)) / 2;
+            int i = (p_181551_1_.getScaledWidth() - FontLoaders.F17.getStringWidth(s)) / 2;
             int j = p_181551_1_.getScaledHeight() - 59;
 
             if (!this.mc.playerController.shouldDrawHUD()) {
@@ -453,7 +453,7 @@ public class GuiIngame extends Gui {
                 GL11.glPushMatrix();
                 GlStateManager.enableBlend();
                 GlStateManager.tryBlendFuncSeparate(770, 771, 1, 0);
-                FontLoaders.F18.drawStringWithShadow(s, (float) i, (float) j, 16777215 + (k << 24));
+                FontLoaders.F17.drawStringWithShadow(s, (float) i, (float) j, 16777215 + (k << 24));
                 GlStateManager.disableBlend();
                 GL11.glPopMatrix();
             }
@@ -469,8 +469,8 @@ public class GuiIngame extends Gui {
             s = I18n.format("demo.remainingTime", StringUtils.ticksToElapsedTime((int) (120500L - this.mc.theWorld.getTotalWorldTime())));
         }
 
-        int i = FontLoaders.F18.getStringWidth(s);
-        FontLoaders.F18.drawStringWithShadow(s, (float) (p_175185_1_.getScaledWidth() - i - 10), 5.0F, 16777215);
+        int i = FontLoaders.F17.getStringWidth(s);
+        FontLoaders.F17.drawStringWithShadow(s, (float) (p_175185_1_.getScaledWidth() - i - 10), 5.0F, 16777215);
     }
 
     protected boolean showCrosshair() {
@@ -515,7 +515,7 @@ public class GuiIngame extends Gui {
 
 
         if (!cancel)
-            FontLoaders.F18.getStringWidth(displayName);
+            FontLoaders.F17.getStringWidth(displayName);
 
         final Map<Score, String> scoreFormatPlayerNameCache = new HashMap<>(size);
 
@@ -543,14 +543,14 @@ public class GuiIngame extends Gui {
 
             if (!cancel) {
                 scoreFormatPlayerNameCache.put(score, s);
-                i = Math.max(i, FontLoaders.F18.getStringWidth(s));
+                i = Math.max(i, FontLoaders.F17.getStringWidth(s));
             }
         }
 
         if (cancel)
             return;
 
-        int i1 = collection.size() * FontLoaders.F18.FONT_HEIGHT;
+        int i1 = collection.size() * FontLoaders.F17.FONT_HEIGHT;
         int j1 = (int) (p_180475_2_.getScaledHeight() / 1.5 + i1 / 3);
         int k1 = 3;
         int l1 = p_180475_2_.getScaledWidth() - i - k1;
@@ -559,17 +559,17 @@ public class GuiIngame extends Gui {
         for (Score score1 : collection) {
             ++j;
             String s1 = scoreFormatPlayerNameCache.get(score1);
-            int k = j1 - j * FontLoaders.F18.FONT_HEIGHT;
+            int k = j1 - j * FontLoaders.F17.FONT_HEIGHT;
             int l = p_180475_2_.getScaledWidth() - k1 + 2;
-            drawRect(l1 - 2, k, l, k + FontLoaders.F18.FONT_HEIGHT, 1342177280);
-            FontLoaders.F18.drawStringWithShadow(s1, l1, k, 0xFFFFFFFF);
+            drawRect(l1 - 2, k, l, k + FontLoaders.F17.FONT_HEIGHT, 1342177280);
+            FontLoaders.F17.drawStringWithShadow(s1, l1, k, 0xFFFFFFFF);
 
             if (j == collection.size()) {
-                drawRect(l1 - 2, k - FontLoaders.F18.FONT_HEIGHT - 1, l, k - 1, 1610612736);
+                drawRect(l1 - 2, k - FontLoaders.F17.FONT_HEIGHT - 1, l, k - 1, 1610612736);
                 drawRect(l1 - 2, k - 1, l, k, 1342177280);
-                FontLoaders.F18.drawStringWithShadow(displayName,
-                                                  l1 + i / 2.0F - FontLoaders.F18.getStringWidth(displayName) / 2.0F,
-                                                  k - FontLoaders.F18.FONT_HEIGHT,
+                FontLoaders.F17.drawStringWithShadow(displayName,
+                                                  l1 + i / 2.0F - FontLoaders.F17.getStringWidth(displayName) / 2.0F,
+                                                  k - FontLoaders.F17.FONT_HEIGHT,
                                                   0xFFFFFFFF);
             }
         }
@@ -801,7 +801,7 @@ public class GuiIngame extends Gui {
             }
 
             String s = BossStatus.bossName;
-            FontLoaders.F18.drawStringWithShadow(s, (float) (i / 2 - FontLoaders.F18.getStringWidth(s) / 2), (float) (i1 - 10), 16777215);
+            FontLoaders.F17.drawStringWithShadow(s, (float) (i / 2 - FontLoaders.F17.getStringWidth(s) / 2), (float) (i1 - 10), 16777215);
             GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
             this.mc.getTextureManager().bindTexture(icons);
         }

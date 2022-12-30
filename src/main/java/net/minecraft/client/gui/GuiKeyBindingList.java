@@ -38,7 +38,7 @@ public class GuiKeyBindingList extends GuiListExtended
                 this.listEntries[i++] = new GuiKeyBindingList.CategoryEntry(s1);
             }
 
-            int j = FontLoaders.F18.getStringWidth(I18n.format(keybinding.getKeyDescription(), new Object[0]));
+            int j = FontLoaders.F17.getStringWidth(I18n.format(keybinding.getKeyDescription(), new Object[0]));
 
             if (j > this.maxListLabelWidth)
             {
@@ -83,12 +83,12 @@ public class GuiKeyBindingList extends GuiListExtended
         public CategoryEntry(String p_i45028_2_)
         {
             this.labelText = I18n.format(p_i45028_2_, new Object[0]);
-            this.labelWidth = FontLoaders.F18.getStringWidth(this.labelText);
+            this.labelWidth = FontLoaders.F17.getStringWidth(this.labelText);
         }
 
         public void drawEntry(int slotIndex, int x, int y, int listWidth, int slotHeight, int mouseX, int mouseY, boolean isSelected)
         {
-           FontLoaders.F18.drawString(this.labelText, GuiKeyBindingList.this.mc.currentScreen.width / 2 - this.labelWidth / 2, y + slotHeight - GuiKeyBindingList.this.mc.fontRendererObj.FONT_HEIGHT - 1, Color.WHITE.getRGB());
+           FontLoaders.F17.drawString(this.labelText, GuiKeyBindingList.this.mc.currentScreen.width / 2 - this.labelWidth / 2, y + slotHeight - GuiKeyBindingList.this.mc.fontRendererObj.FONT_HEIGHT - 1, Color.WHITE.getRGB());
         }
 
         public boolean mousePressed(int slotIndex, int p_148278_2_, int p_148278_3_, int p_148278_4_, int p_148278_5_, int p_148278_6_)
@@ -123,7 +123,7 @@ public class GuiKeyBindingList extends GuiListExtended
         public void drawEntry(int slotIndex, int x, int y, int listWidth, int slotHeight, int mouseX, int mouseY, boolean isSelected)
         {
             boolean flag = GuiKeyBindingList.this.field_148191_k.buttonId == this.keybinding;
-           FontLoaders.F18.drawString(this.keyDesc, x + 90 - GuiKeyBindingList.this.maxListLabelWidth, y + slotHeight / 2 - GuiKeyBindingList.this.mc.fontRendererObj.FONT_HEIGHT / 2, Color.WHITE.getRGB());
+           FontLoaders.F17.drawString(this.keyDesc, x + 90 - GuiKeyBindingList.this.maxListLabelWidth, y + slotHeight / 2 - GuiKeyBindingList.this.mc.fontRendererObj.FONT_HEIGHT / 2, Color.WHITE.getRGB());
             this.btnReset.xPosition = x + 190;
             this.btnReset.yPosition = y;
             this.btnReset.enabled = this.keybinding.getKeyCode() != this.keybinding.getKeyCodeDefault();

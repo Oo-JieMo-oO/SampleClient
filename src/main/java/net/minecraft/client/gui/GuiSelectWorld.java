@@ -230,8 +230,9 @@ public class GuiSelectWorld extends GuiScreen implements GuiYesNoCallback
      */
     public void drawScreen(int mouseX, int mouseY, float partialTicks)
     {
+        drawBackground(0);
         this.field_146638_t.drawScreen(mouseX, mouseY, partialTicks);
-        FontLoaders.F18.drawCenteredString(this.field_146628_f, this.width / 2, 20, 16777215);
+        FontLoaders.F17.drawCenteredString(this.field_146628_f, this.width / 2, 20, 16777215);
         super.drawScreen(mouseX, mouseY, partialTicks);
     }
 
@@ -321,9 +322,9 @@ public class GuiSelectWorld extends GuiScreen implements GuiYesNoCallback
                 }
             }
 
-            FontLoaders.F18.drawString(s, p_180791_2_ + 2, p_180791_3_ + 1, 16777215);
-            FontLoaders.F18.drawString(s1, p_180791_2_ + 2, p_180791_3_ + 12, 8421504);
-            FontLoaders.F18.drawString(s2, p_180791_2_ + 2, p_180791_3_ + 12 + 10, 8421504);
+            FontLoaders.F17.drawString(s, p_180791_2_ + 2, p_180791_3_ + 1, 16777215);
+            FontLoaders.F17.drawString(s1, p_180791_2_ + 2, p_180791_3_ + 12, 8421504);
+            FontLoaders.F17.drawString(s2, p_180791_2_ + 2, p_180791_3_ + 12 + 10, 8421504);
         }
     }
 }

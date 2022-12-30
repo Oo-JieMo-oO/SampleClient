@@ -121,7 +121,7 @@ public class GuiButton extends Gui
             {
                 j = Colors.DEEP_PURPLE;
             }
-            FontLoaders.F18.drawCenteredString(this.displayString, this.xPosition + this.width / 2, this.yPosition + (this.height - 8) / 2, Color.WHITE.getRGB());
+            FontLoaders.F17.drawCenteredString(this.displayString, this.xPosition + this.width / 2, this.yPosition + (this.height - 8) / 2, j);
         }
     }
 

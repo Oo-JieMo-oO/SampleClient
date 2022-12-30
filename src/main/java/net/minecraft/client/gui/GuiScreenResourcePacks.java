@@ -231,8 +231,8 @@ public class GuiScreenResourcePacks extends GuiScreen
         this.drawBackground(0);
         this.availableResourcePacksList.drawScreen(mouseX, mouseY, partialTicks);
         this.selectedResourcePacksList.drawScreen(mouseX, mouseY, partialTicks);
-        FontLoaders.F18.drawCenteredString(I18n.format("resourcePack.title", new Object[0]), this.width / 2, 16, Color.WHITE.getRGB());
-        FontLoaders.F18.drawCenteredString(I18n.format("resourcePack.folderInfo", new Object[0]), this.width / 2 - 77, this.height - 26, Color.GRAY.getRGB());
+        FontLoaders.F17.drawCenteredString(I18n.format("resourcePack.title", new Object[0]), this.width / 2, 16, Color.WHITE.getRGB());
+        FontLoaders.F17.drawCenteredString(I18n.format("resourcePack.folderInfo", new Object[0]), this.width / 2 - 77, this.height - 26, Color.GRAY.getRGB());
         super.drawScreen(mouseX, mouseY, partialTicks);
     }
 

@@ -61,6 +61,7 @@ public class GuiLanguage extends GuiScreen
     {
         super.handleMouseInput();
         this.list.handleMouseInput();
+        this.list.handleMouseInput();
     }
 
     /**
@@ -103,9 +104,10 @@ public class GuiLanguage extends GuiScreen
      */
     public void drawScreen(int mouseX, int mouseY, float partialTicks)
     {
+        drawBackground(0);
         this.list.drawScreen(mouseX, mouseY, partialTicks);
-        FontLoaders.F18.drawCenteredString(I18n.format("options.language", new Object[0]), this.width / 2, 16, Color.WHITE.getRGB());
-        FontLoaders.F18.drawCenteredString("(" + I18n.format("options.languageWarning", new Object[0]) + ")", this.width / 2, this.height - 56, Color.GRAY.getRGB());
+        FontLoaders.F17.drawCenteredString(I18n.format("options.language", new Object[0]), this.width / 2, 16, Color.WHITE.getRGB());
+        FontLoaders.F17.drawCenteredString("(" + I18n.format("options.languageWarning", new Object[0]) + ")", this.width / 2, this.height - 56, Color.GRAY.getRGB());
         super.drawScreen(mouseX, mouseY, partialTicks);
     }
 
@@ -159,7 +161,7 @@ public class GuiLanguage extends GuiScreen
 
         protected void drawSlot(int entryID, int p_180791_2_, int p_180791_3_, int p_180791_4_, int mouseXIn, int mouseYIn)
         {
-            FontLoaders.F18.drawCenteredString(((Language)this.languageMap.get(this.langCodeList.get(entryID))).toString(), this.width / 2, p_180791_3_ + 1, Color.WHITE.getRGB());
+            FontLoaders.F17.drawCenteredString(((Language)this.languageMap.get(this.langCodeList.get(entryID))).toString(), this.width / 2, p_180791_3_ + 1, Color.WHITE.getRGB());
         }
     }
 }

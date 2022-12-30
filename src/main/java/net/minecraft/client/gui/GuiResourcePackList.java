@@ -19,7 +19,7 @@ public abstract class GuiResourcePackList extends GuiListExtended
         this.mc = mcIn;
         this.field_148204_l = p_i45055_4_;
         this.field_148163_i = false;
-        this.setHasListHeader(true, (int)((float)FontLoaders.F18.FONT_HEIGHT * 1.5F));
+        this.setHasListHeader(true, (int)((float)FontLoaders.F17.FONT_HEIGHT * 1.5F));
     }
 
     /**
@@ -28,7 +28,7 @@ public abstract class GuiResourcePackList extends GuiListExtended
     protected void drawListHeader(int p_148129_1_, int p_148129_2_, Tessellator p_148129_3_)
     {
         String s = EnumChatFormatting.UNDERLINE + "" + EnumChatFormatting.BOLD + this.getListHeader();
-        FontLoaders.F18.drawString(s, p_148129_1_ + this.width / 2 - FontLoaders.F18.getStringWidth(s) / 2, Math.min(this.top + 3, p_148129_2_), Color.WHITE.getRGB());
+        FontLoaders.F17.drawString(s, p_148129_1_ + this.width / 2 - FontLoaders.F17.getStringWidth(s) / 2, Math.min(this.top + 3, p_148129_2_), Color.WHITE.getRGB());
     }
 
     protected abstract String getListHeader();

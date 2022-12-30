@@ -72,7 +72,7 @@ public class ScreenChatOptions extends GuiScreen
     public void drawScreen(int mouseX, int mouseY, float partialTicks)
     {
         this.drawDefaultBackground();
-        FontLoaders.F18.drawCenteredString(this.field_146401_i, this.width / 2, 20, Color.WHITE.getRGB());
+        FontLoaders.F17.drawCenteredString(this.field_146401_i, this.width / 2, 20, Color.WHITE.getRGB());
         super.drawScreen(mouseX, mouseY, partialTicks);
     }
 }

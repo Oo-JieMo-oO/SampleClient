@@ -200,7 +200,7 @@ public class GuiVideoSettings extends GuiScreenOF
     public void drawScreen(int mouseX, int mouseY, float partialTicks)
     {
         this.drawDefaultBackground();
-        FontLoaders.F18.drawCenteredString(this.screenTitle, this.width / 2, 15, Color.WHITE.getRGB());
+        FontLoaders.F17.drawCenteredString(this.screenTitle, this.width / 2, 15, Color.WHITE.getRGB());
         String s = Config.getVersion();
         String s1 = "HD_U";
 
@@ -219,10 +219,10 @@ public class GuiVideoSettings extends GuiScreenOF
             s = "OptiFine L5 Light";
         }
 
-        FontLoaders.F18.drawString( s, 2, this.height - 10, Color.GRAY.getRGB());
+        FontLoaders.F17.drawString( s, 2, this.height - 10, Color.GRAY.getRGB());
         String s2 = "Minecraft 1.8.9";
-        int i = FontLoaders.F18.getStringWidth(s2);
-        FontLoaders.F18.drawString(s2, this.width - i - 2, this.height - 10, Color.GRAY.getRGB());
+        int i = FontLoaders.F17.getStringWidth(s2);
+        FontLoaders.F17.drawString(s2, this.width - i - 2, this.height - 10, Color.GRAY.getRGB());
         super.drawScreen(mouseX, mouseY, partialTicks);
         this.tooltipManager.drawTooltips(mouseX, mouseY, this.buttonList);
     }

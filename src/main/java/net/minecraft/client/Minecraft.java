@@ -137,6 +137,7 @@ public class Minecraft implements IThreadListener, IPlayerUsage {
      */
     private static int debugFPS;
     public final File mcDataDir;
+    private long lastFrame = getTime();
     public final FrameTimer field_181542_y = new FrameTimer();
     private final Timer timer = new Timer(20.0F);
     private final File fileResourcepacks;
@@ -928,7 +929,15 @@ public class Minecraft implements IThreadListener, IPlayerUsage {
     /**
      * Called repeatedly from run()
      */
+    public long getTime() {
+        return (Sys.getTime() * 1000) / Sys.getTimerResolution();
+    }
     private void runGameLoop() {
+        final long currentTime = getTime();
+        final int deltaTime = (int) (currentTime - lastFrame);
+        lastFrame = currentTime;
+
+        RenderingUtils.deltaTime = deltaTime;
         long i = System.nanoTime();
 
         if (Display.isCreated() && Display.isCloseRequested()) {

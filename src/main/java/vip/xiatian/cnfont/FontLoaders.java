@@ -8,9 +8,11 @@ import java.awt.*;
 public abstract class FontLoaders {
     public static FontDrawer F18;
     public static FontDrawer F16;
+    public static FontDrawer F17;
 
     public static void initFonts() {
         F18 = getFont("misans", 18, true);
+        F17 = getFont("misans", 17, true);
         F16 = getFont("misans", 16, true);
     }
 
