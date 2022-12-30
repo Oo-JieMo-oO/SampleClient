@@ -192,6 +192,7 @@ public class ServerListEntryNormal implements GuiListExtended.IGuiListEntry
             int l1 = mouseY - y;
 
             if (this.func_178013_b())
+            if (this.func_178013_b())
             {
                 if (k1 < 32 && k1 > 16)
                 {
