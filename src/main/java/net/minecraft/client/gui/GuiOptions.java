@@ -10,7 +10,9 @@ import net.minecraft.util.ChatComponentText;
 import net.minecraft.util.ChatComponentTranslation;
 import net.minecraft.util.IChatComponent;
 import net.minecraft.world.EnumDifficulty;
+import vip.xiatian.cnfont.FontLoaders;
 
+import java.awt.*;
 import java.io.IOException;
 
 public class GuiOptions extends GuiScreen implements GuiYesNoCallback
@@ -217,7 +219,7 @@ public class GuiOptions extends GuiScreen implements GuiYesNoCallback
     public void drawScreen(int mouseX, int mouseY, float partialTicks)
     {
         this.drawDefaultBackground();
-        this.drawCenteredString(this.fontRendererObj, this.field_146442_a, this.width / 2, 15, 16777215);
+        FontLoaders.F18.drawCenteredString(this.field_146442_a, this.width / 2, 15, Color.WHITE.getRGB());
         super.drawScreen(mouseX, mouseY, partialTicks);
     }
 }

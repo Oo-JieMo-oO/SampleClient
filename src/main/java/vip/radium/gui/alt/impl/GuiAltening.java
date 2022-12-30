@@ -14,6 +14,7 @@ import vip.radium.utils.Wrapper;
 import net.minecraft.client.gui.GuiButton;
 import net.minecraft.client.gui.GuiScreen;
 import net.minecraft.client.gui.GuiTextField;
+import vip.xiatian.cnfont.FontLoaders;
 
 import java.io.IOException;
 
@@ -35,7 +36,7 @@ public final class GuiAltening extends GuiAltScreen {
 
         final int middleX = width / 2 - (buttonWidth / 2);
         final int middleY = height / 4 + 48;
-        this.tokenField = new GuiTextField(3, Wrapper.getMinecraftFontRenderer(),
+        this.tokenField = new GuiTextField(3, FontLoaders.F18,
                 "API Key", middleX, middleY, buttonWidth, buttonHeight - margin);
 
         this.textFields.add(tokenField);

@@ -1,11 +1,14 @@
 package net.minecraft.client.gui;
 
 import com.google.common.collect.Lists;
+
+import java.awt.*;
 import java.io.IOException;
 import java.util.TreeMap;
 import java.util.Map.Entry;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.client.settings.GameSettings;
+import vip.xiatian.cnfont.FontLoaders;
 
 public class GuiSnooper extends GuiScreen
 {
@@ -104,13 +107,13 @@ public class GuiSnooper extends GuiScreen
     {
         this.drawDefaultBackground();
         this.field_146606_s.drawScreen(mouseX, mouseY, partialTicks);
-        this.drawCenteredString(this.fontRendererObj, this.field_146610_i, this.width / 2, 8, 16777215);
+        FontLoaders.F18.drawCenteredString(this.field_146610_i, this.width / 2, 8, Color.WHITE.getRGB());
         int i = 22;
 
         for (String s : this.field_146607_r)
         {
-            this.drawCenteredString(this.fontRendererObj, s, this.width / 2, i, 8421504);
-            i += this.fontRendererObj.FONT_HEIGHT;
+            FontLoaders.F18.drawCenteredString(s, this.width / 2, i,Color.GRAY.getRGB());
+            i += FontLoaders.F18.FONT_HEIGHT;
         }
 
         super.drawScreen(mouseX, mouseY, partialTicks);
@@ -120,7 +123,7 @@ public class GuiSnooper extends GuiScreen
     {
         public List()
         {
-            super(GuiSnooper.this.mc, GuiSnooper.this.width, GuiSnooper.this.height, 80, GuiSnooper.this.height - 40, GuiSnooper.this.fontRendererObj.FONT_HEIGHT + 1);
+            super(GuiSnooper.this.mc, GuiSnooper.this.width, GuiSnooper.this.height, 80, GuiSnooper.this.height - 40, FontLoaders.F18.FONT_HEIGHT + 1);
         }
 
         protected int getSize()
@@ -143,8 +146,8 @@ public class GuiSnooper extends GuiScreen
 
         protected void drawSlot(int entryID, int p_180791_2_, int p_180791_3_, int p_180791_4_, int mouseXIn, int mouseYIn)
         {
-            GuiSnooper.this.fontRendererObj.drawString((String)GuiSnooper.this.field_146604_g.get(entryID), 10, p_180791_3_, 16777215);
-            GuiSnooper.this.fontRendererObj.drawString((String)GuiSnooper.this.field_146609_h.get(entryID), 230, p_180791_3_, 16777215);
+            FontLoaders.F18.drawString((String)GuiSnooper.this.field_146604_g.get(entryID), 10, p_180791_3_, Color.WHITE.getRGB());
+            FontLoaders.F18.drawString((String)GuiSnooper.this.field_146609_h.get(entryID), 230, p_180791_3_, Color.WHITE.getRGB());
         }
 
         protected int getScrollBarX()

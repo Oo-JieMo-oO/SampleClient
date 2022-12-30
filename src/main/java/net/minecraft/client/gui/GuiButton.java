@@ -7,6 +7,9 @@ import net.minecraft.client.audio.PositionedSoundRecord;
 import net.minecraft.client.audio.SoundHandler;
 import net.minecraft.util.ResourceLocation;
 import org.lwjgl.opengl.GL11;
+import vip.xiatian.cnfont.FontLoaders;
+
+import java.awt.*;
 
 public class GuiButton extends Gui
 {
@@ -81,7 +84,6 @@ public class GuiButton extends Gui
     {
         if (this.visible)
         {
-            MinecraftFontRenderer fontrenderer = mc.fontRendererObj;
 //            mc.getTextureManager().bindTexture(buttonTextures);
 //            GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
             this.hovered = mouseX >= this.xPosition && mouseY >= this.yPosition && mouseX < this.xPosition + this.width && mouseY < this.yPosition + this.height;
@@ -119,8 +121,7 @@ public class GuiButton extends Gui
             {
                 j = Colors.DEEP_PURPLE;
             }
-
-            this.drawCenteredString(fontrenderer, this.displayString, this.xPosition + this.width / 2, this.yPosition + (this.height - 8) / 2, j);
+            FontLoaders.F18.drawCenteredString(this.displayString, this.xPosition + this.width / 2, this.yPosition + (this.height - 8) / 2, Color.WHITE.getRGB());
         }
     }
 

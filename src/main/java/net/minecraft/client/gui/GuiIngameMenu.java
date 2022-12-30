@@ -4,7 +4,9 @@ import net.minecraft.client.gui.achievement.GuiAchievements;
 import net.minecraft.client.gui.achievement.GuiStats;
 import net.minecraft.client.multiplayer.WorldClient;
 import net.minecraft.client.resources.I18n;
+import vip.xiatian.cnfont.FontLoaders;
 
+import java.awt.*;
 import java.io.IOException;
 
 public class GuiIngameMenu extends GuiScreen
@@ -103,7 +105,7 @@ public class GuiIngameMenu extends GuiScreen
     public void drawScreen(int mouseX, int mouseY, float partialTicks)
     {
         this.drawDefaultBackground();
-        this.drawCenteredString(this.fontRendererObj, I18n.format("menu.game", new Object[0]), this.width / 2, 40, 16777215);
+        FontLoaders.F18.drawCenteredString(I18n.format("menu.game", new Object[0]), this.width / 2, 40, Color.WHITE.getRGB());
         super.drawScreen(mouseX, mouseY, partialTicks);
     }
 }

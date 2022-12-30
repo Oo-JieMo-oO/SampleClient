@@ -20,6 +20,7 @@ import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.World;
 import org.lwjgl.input.Keyboard;
 import org.lwjgl.opengl.GL11;
+import vip.xiatian.cnfont.FontLoaders;
 
 public class GuiRepair extends GuiContainer implements ICrafting
 {
@@ -45,7 +46,7 @@ public class GuiRepair extends GuiContainer implements ICrafting
         Keyboard.enableRepeatEvents(true);
         int i = (this.width - this.xSize) / 2;
         int j = (this.height - this.ySize) / 2;
-        this.nameField = new GuiTextField(0, this.fontRendererObj, i + 62, j + 24, 103, 12);
+        this.nameField = new GuiTextField(0, FontLoaders.F18, i + 62, j + 24, 103, 12);
         this.nameField.setTextColor(-1);
         this.nameField.setDisabledTextColour(-1);
         this.nameField.setEnableBackgroundDrawing(false);

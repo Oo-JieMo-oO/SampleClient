@@ -1,5 +1,6 @@
 package net.minecraft.client.gui;
 
+import java.awt.*;
 import java.io.IOException;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.client.settings.GameSettings;
@@ -16,6 +17,7 @@ import net.optifine.gui.GuiScreenOF;
 import net.optifine.gui.TooltipManager;
 import net.optifine.gui.TooltipProviderOptions;
 import net.optifine.shaders.gui.GuiShaders;
+import vip.xiatian.cnfont.FontLoaders;
 
 public class GuiVideoSettings extends GuiScreenOF
 {
@@ -198,7 +200,7 @@ public class GuiVideoSettings extends GuiScreenOF
     public void drawScreen(int mouseX, int mouseY, float partialTicks)
     {
         this.drawDefaultBackground();
-        this.drawCenteredString(this.fontRendererObj, this.screenTitle, this.width / 2, 15, 16777215);
+        FontLoaders.F18.drawCenteredString(this.screenTitle, this.width / 2, 15, Color.WHITE.getRGB());
         String s = Config.getVersion();
         String s1 = "HD_U";
 
@@ -217,10 +219,10 @@ public class GuiVideoSettings extends GuiScreenOF
             s = "OptiFine L5 Light";
         }
 
-        this.drawString(this.fontRendererObj, s, 2, this.height - 10, 8421504);
+        FontLoaders.F18.drawString( s, 2, this.height - 10, Color.GRAY.getRGB());
         String s2 = "Minecraft 1.8.9";
-        int i = this.fontRendererObj.getStringWidth(s2);
-        this.drawString(this.fontRendererObj, s2, this.width - i - 2, this.height - 10, 8421504);
+        int i = FontLoaders.F18.getStringWidth(s2);
+        FontLoaders.F18.drawString(s2, this.width - i - 2, this.height - 10, Color.GRAY.getRGB());
         super.drawScreen(mouseX, mouseY, partialTicks);
         this.tooltipManager.drawTooltips(mouseX, mouseY, this.buttonList);
     }

@@ -7,6 +7,7 @@ import com.google.common.collect.Lists;
 import java.util.List;
 import net.minecraft.client.Minecraft;
 import net.minecraft.util.IntHashMap;
+import vip.xiatian.cnfont.FontLoaders;
 
 public class GuiPageButtonList extends GuiListExtended
 {
@@ -219,7 +220,7 @@ public class GuiPageButtonList extends GuiListExtended
 
     private GuiTextField func_178068_a(int p_178068_1_, int p_178068_2_, GuiPageButtonList.EditBoxEntry p_178068_3_)
     {
-        GuiTextField guitextfield = new GuiTextField(p_178068_3_.func_178935_b(), this.mc.fontRendererObj, p_178068_1_, p_178068_2_, 150, 20);
+        GuiTextField guitextfield = new GuiTextField(p_178068_3_.func_178935_b(), FontLoaders.F18, p_178068_1_, p_178068_2_, 150, 20);
         guitextfield.setText(p_178068_3_.func_178936_c());
         guitextfield.func_175207_a(this.field_178076_z);
         guitextfield.setVisible(p_178068_3_.func_178934_d());

@@ -1,8 +1,10 @@
 package net.minecraft.client.gui;
 
+import java.awt.*;
 import java.io.IOException;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.client.settings.GameSettings;
+import vip.xiatian.cnfont.FontLoaders;
 
 public class ScreenChatOptions extends GuiScreen
 {
@@ -70,7 +72,7 @@ public class ScreenChatOptions extends GuiScreen
     public void drawScreen(int mouseX, int mouseY, float partialTicks)
     {
         this.drawDefaultBackground();
-        this.drawCenteredString(this.fontRendererObj, this.field_146401_i, this.width / 2, 20, 16777215);
+        FontLoaders.F18.drawCenteredString(this.field_146401_i, this.width / 2, 20, Color.WHITE.getRGB());
         super.drawScreen(mouseX, mouseY, partialTicks);
     }
 }

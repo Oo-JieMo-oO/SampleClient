@@ -5,6 +5,7 @@ import net.minecraft.client.resources.I18n;
 import net.minecraft.world.storage.ISaveFormat;
 import net.minecraft.world.storage.WorldInfo;
 import org.lwjgl.input.Keyboard;
+import vip.xiatian.cnfont.FontLoaders;
 
 public class GuiRenameWorld extends GuiScreen
 {
@@ -39,7 +40,7 @@ public class GuiRenameWorld extends GuiScreen
         ISaveFormat isaveformat = this.mc.getSaveLoader();
         WorldInfo worldinfo = isaveformat.getWorldInfo(this.saveName);
         String s = worldinfo.getWorldName();
-        this.field_146583_f = new GuiTextField(2, this.fontRendererObj, this.width / 2 - 100, 60, 200, 20);
+        this.field_146583_f = new GuiTextField(2, FontLoaders.F18, this.width / 2 - 100, 60, 200, 20);
         this.field_146583_f.setFocused(true);
         this.field_146583_f.setText(s);
     }

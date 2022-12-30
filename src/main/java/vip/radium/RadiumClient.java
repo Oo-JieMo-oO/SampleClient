@@ -15,6 +15,7 @@ import vip.radium.gui.csgo.SkeetUI;
 import vip.radium.gui.font.FontManager;
 import vip.radium.module.ModuleManager;
 import vip.radium.notification.NotificationManager;
+import vip.xiatian.cnfont.FontLoaders;
 
 import static org.lwjgl.opengl.GL11.*;
 
@@ -79,6 +80,7 @@ public final class RadiumClient {
     public final Listener<ClientStartupEvent> onClientStart = e -> {
         setGLHints();
         FontManager.initTextures();
+        FontLoaders.initFonts();
 
         configManager = new ConfigManager();
 

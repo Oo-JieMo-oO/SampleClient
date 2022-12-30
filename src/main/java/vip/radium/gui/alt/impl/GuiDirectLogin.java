@@ -13,6 +13,7 @@ import vip.radium.utils.Wrapper;
 import net.minecraft.client.gui.GuiButton;
 import net.minecraft.client.gui.GuiScreen;
 import net.minecraft.client.gui.GuiTextField;
+import vip.xiatian.cnfont.FontLoaders;
 
 import java.io.IOException;
 
@@ -35,9 +36,9 @@ public final class GuiDirectLogin extends GuiAltScreen {
 
         final int middleX = width / 2 - (buttonWidth / 2);
         final int middleY = height / 4 + 48;
-        this.emailField = new GuiTextField(3, Wrapper.getMinecraftFontRenderer(),
+        this.emailField = new GuiTextField(3, FontLoaders.F18,
                 "Email", middleX, middleY, buttonWidth, buttonHeight - margin);
-        this.passwordField = new GuiTextField(4, Wrapper.getMinecraftFontRenderer(),
+        this.passwordField = new GuiTextField(4, FontLoaders.F18,
                 "Password", middleX, middleY + offset, buttonWidth, buttonHeight - margin);
 
         this.textFields.add(emailField);

@@ -1,6 +1,8 @@
 package net.minecraft.client.gui;
 
 import com.google.common.collect.Lists;
+
+import java.awt.*;
 import java.io.File;
 import java.io.IOException;
 import java.net.URI;
@@ -15,6 +17,7 @@ import net.minecraft.util.Util;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.lwjgl.Sys;
+import vip.xiatian.cnfont.FontLoaders;
 
 public class GuiScreenResourcePacks extends GuiScreen
 {
@@ -228,8 +231,8 @@ public class GuiScreenResourcePacks extends GuiScreen
         this.drawBackground(0);
         this.availableResourcePacksList.drawScreen(mouseX, mouseY, partialTicks);
         this.selectedResourcePacksList.drawScreen(mouseX, mouseY, partialTicks);
-        this.drawCenteredString(this.fontRendererObj, I18n.format("resourcePack.title", new Object[0]), this.width / 2, 16, 16777215);
-        this.drawCenteredString(this.fontRendererObj, I18n.format("resourcePack.folderInfo", new Object[0]), this.width / 2 - 77, this.height - 26, 8421504);
+        FontLoaders.F18.drawCenteredString(I18n.format("resourcePack.title", new Object[0]), this.width / 2, 16, Color.WHITE.getRGB());
+        FontLoaders.F18.drawCenteredString(I18n.format("resourcePack.folderInfo", new Object[0]), this.width / 2 - 77, this.height - 26, Color.GRAY.getRGB());
         super.drawScreen(mouseX, mouseY, partialTicks);
     }
 

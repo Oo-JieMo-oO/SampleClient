@@ -11,7 +11,9 @@ import net.minecraft.client.resources.I18n;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.lwjgl.input.Keyboard;
+import vip.xiatian.cnfont.FontLoaders;
 
+import java.awt.*;
 import java.io.IOException;
 import java.util.List;
 
@@ -275,7 +277,7 @@ public class GuiMultiplayer extends GuiScreen implements GuiYesNoCallback {
         this.hoveringText = null;
         Gui.drawRect(0, 0, width, height, 0xFF282C34);
         this.serverListSelector.drawScreen(mouseX, mouseY, partialTicks);
-        this.drawCenteredString(this.fontRendererObj, I18n.format("multiplayer.title"), this.width / 2, 20, 16777215);
+        FontLoaders.F18.drawCenteredString(I18n.format("multiplayer.title"), this.width / 2, 20, Color.WHITE.getRGB());
         super.drawScreen(mouseX, mouseY, partialTicks);
 
         if (this.hoveringText != null) {

@@ -18,6 +18,7 @@ import net.optifine.render.GlBlendState;
 import net.optifine.util.FontUtils;
 import org.apache.commons.io.IOUtils;
 import org.lwjgl.opengl.GL11;
+import vip.xiatian.cnfont.FontLoaders;
 
 import java.awt.image.BufferedImage;
 import java.io.IOException;
@@ -303,7 +304,7 @@ public class MinecraftFontRenderer implements IResourceManagerReloadListener, Fo
 
     @Override
     public int drawStringWithShadow(String text, float x, float y, int color) {
-        return this.drawString(text, x, y, color, true);
+        return FontLoaders.F18.drawString(text, x, y, color, true);
     }
 
     /**
@@ -312,7 +313,7 @@ public class MinecraftFontRenderer implements IResourceManagerReloadListener, Fo
 
     @Override
     public int drawString(String text, float x, float y, int color) {
-        return this.drawString(text, x, y, color, false);
+        return FontLoaders.F18.drawString(text, x, y, color, false);
     }
 
     /**
@@ -484,7 +485,7 @@ public class MinecraftFontRenderer implements IResourceManagerReloadListener, Fo
     }
 
     public int getStringWidth(String text) {
-        return (int) getWidth(text);
+        return FontLoaders.F18.getStringWidth(text);
     }
 
     /**

@@ -9,11 +9,14 @@ import net.minecraft.client.renderer.vertex.DefaultVertexFormats;
 import net.minecraft.util.ChatAllowedCharacters;
 import net.minecraft.util.MathHelper;
 import org.lwjgl.opengl.GL11;
+import vip.xiatian.cnfont.FontDrawer;
+
+import java.awt.*;
 
 public class GuiTextField extends Gui
 {
     private final int id;
-    private final MinecraftFontRenderer fontRendererInstance;
+    private final FontDrawer fontRendererInstance;
     public int xPosition;
     public int yPosition;
 
@@ -59,7 +62,7 @@ public class GuiTextField extends Gui
     private GuiPageButtonList.GuiResponder field_175210_x;
     private Predicate<String> field_175209_y = Predicates.<String>alwaysTrue();
 
-    public GuiTextField(int componentId, MinecraftFontRenderer fontrendererObj, String placeholder, int x, int y, int par5Width, int par6Height)
+    public GuiTextField(int componentId,FontDrawer fontrendererObj, String placeholder, int x, int y, int par5Width, int par6Height)
     {
         this.placeholder = placeholder;
         this.id = componentId;
@@ -70,7 +73,7 @@ public class GuiTextField extends Gui
         this.height = par6Height;
     }
 
-    public GuiTextField(int componentId, MinecraftFontRenderer fontrendererObj, int x, int y, int par5Width, int par6Height)
+    public GuiTextField(int componentId, FontDrawer fontrendererObj, int x, int y, int par5Width, int par6Height)
     {
         this(componentId, fontrendererObj, null, x, y, par5Width, par6Height);
     }
@@ -522,8 +525,8 @@ public class GuiTextField extends Gui
                 i -= 4;
             }
 
-            String s = this.fontRendererInstance.trimStringToWidth(this.text.substring(this.lineScrollOffset), this.getWidth());
-            this.setCursorPosition(this.fontRendererInstance.trimStringToWidth(s, i).length() + this.lineScrollOffset);
+            String s = this.fontRendererInstance.trimStringToWidth(this.text.substring(this.lineScrollOffset), this.getWidth(),true);
+            this.setCursorPosition(this.fontRendererInstance.trimStringToWidth(s, i,true).length() + this.lineScrollOffset);
         }
     }
 
@@ -544,7 +547,7 @@ public class GuiTextField extends Gui
             int j = this.cursorPosition - this.lineScrollOffset;
             int k = this.selectionEnd - this.lineScrollOffset;
             String s = this.fontRendererInstance.trimStringToWidth(
-                    this.text.substring(this.lineScrollOffset), this.getWidth());
+                    this.text.substring(this.lineScrollOffset), this.getWidth(),true);
             boolean flag = j >= 0 && j <= s.length();
             boolean flag1 = this.isFocused && this.cursorCounter / 6 % 2 == 0 && flag;
             int l = this.enableBackgroundDrawing ? this.xPosition + 4 : this.xPosition;
@@ -559,7 +562,7 @@ public class GuiTextField extends Gui
             if (s.length() > 0)
             {
                 String s1 = flag ? s.substring(0, j) : s;
-                j1 = this.fontRendererInstance.drawStringWithShadow(s1, (float)l, (float)i1, i);
+                j1 = this.fontRendererInstance.drawStringWithShadow(s1, (float)l, (float)i1, Color.WHITE.getRGB());
             } else if (placeholder != null && !isFocused) {
                 this.fontRendererInstance.drawStringWithShadow("\2477" + placeholder, (float)l, (float)i1, -1);
             }
@@ -579,14 +582,14 @@ public class GuiTextField extends Gui
 
             if (s.length() > 0 && flag && j < s.length())
             {
-                this.fontRendererInstance.drawStringWithShadow(s.substring(j), (float) j1, (float) i1, i);
+                this.fontRendererInstance.drawStringWithShadow(s.substring(j), (float) j1, (float) i1, Color.WHITE.getRGB());
             }
 
             if (flag1)
             {
                 if (flag2)
                 {
-                    Gui.drawRect(k1, i1 - 1, k1 + 1, i1 + 1 + this.fontRendererInstance.FONT_HEIGHT, -3092272);
+                    Gui.drawRect(k1, i1 - 1, k1 + 1, i1 + 1 + this.fontRendererInstance.FONT_HEIGHT, -Color.WHITE.getRGB());
                 }
                 else
                 {
@@ -771,7 +774,7 @@ public class GuiTextField extends Gui
             }
 
             int j = this.getWidth();
-            String s = this.fontRendererInstance.trimStringToWidth(this.text.substring(this.lineScrollOffset), j);
+            String s = this.fontRendererInstance.trimStringToWidth(this.text.substring(this.lineScrollOffset), j,true);
             int k = s.length() + this.lineScrollOffset;
 
             if (p_146199_1_ == this.lineScrollOffset)

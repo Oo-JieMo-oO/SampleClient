@@ -1,10 +1,12 @@
 package net.minecraft.client.gui;
 
+import java.awt.*;
 import java.io.IOException;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.client.settings.GameSettings;
 import net.minecraft.client.settings.KeyBinding;
+import vip.xiatian.cnfont.FontLoaders;
 
 public class GuiControls extends GuiScreen
 {
@@ -158,7 +160,7 @@ public class GuiControls extends GuiScreen
     {
         this.drawDefaultBackground();
         this.keyBindingList.drawScreen(mouseX, mouseY, partialTicks);
-        this.drawCenteredString(this.fontRendererObj, this.screenTitle, this.width / 2, 8, 16777215);
+        FontLoaders.F18.drawCenteredString(this.screenTitle, this.width / 2, 8, Color.WHITE.getRGB());
         boolean flag = true;
 
         for (KeyBinding keybinding : this.options.keyBindings)

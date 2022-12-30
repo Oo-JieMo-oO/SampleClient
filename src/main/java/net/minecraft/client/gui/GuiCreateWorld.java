@@ -1,5 +1,6 @@
 package net.minecraft.client.gui;
 
+import java.awt.*;
 import java.io.IOException;
 import java.util.Random;
 import net.minecraft.client.resources.I18n;
@@ -10,6 +11,7 @@ import net.minecraft.world.storage.ISaveFormat;
 import net.minecraft.world.storage.WorldInfo;
 import org.apache.commons.lang3.StringUtils;
 import org.lwjgl.input.Keyboard;
+import vip.xiatian.cnfont.FontLoaders;
 
 public class GuiCreateWorld extends GuiScreen
 {
@@ -83,10 +85,10 @@ public class GuiCreateWorld extends GuiScreen
         this.btnAllowCommands.visible = false;
         this.buttonList.add(this.btnCustomizeType = new GuiButton(8, this.width / 2 + 5, 120, 150, 20, I18n.format("selectWorld.customizeType", new Object[0])));
         this.btnCustomizeType.visible = false;
-        this.field_146333_g = new GuiTextField(9, this.fontRendererObj, this.width / 2 - 100, 60, 200, 20);
+        this.field_146333_g = new GuiTextField(9, FontLoaders.F18, this.width / 2 - 100, 60, 200, 20);
         this.field_146333_g.setFocused(true);
         this.field_146333_g.setText(this.field_146330_J);
-        this.field_146335_h = new GuiTextField(10, this.fontRendererObj, this.width / 2 - 100, 60, 200, 20);
+        this.field_146335_h = new GuiTextField(10, FontLoaders.F18, this.width / 2 - 100, 60, 200, 20);
         this.field_146335_h.setText(this.field_146329_I);
         this.func_146316_a(this.field_146344_y);
         this.func_146314_g();
@@ -449,21 +451,21 @@ public class GuiCreateWorld extends GuiScreen
     public void drawScreen(int mouseX, int mouseY, float partialTicks)
     {
         this.drawDefaultBackground();
-        this.drawCenteredString(this.fontRendererObj, I18n.format("selectWorld.create", new Object[0]), this.width / 2, 20, -1);
+        FontLoaders.F18.drawCenteredString(I18n.format("selectWorld.create", new Object[0]), this.width / 2, 20, -1);
 
         if (this.field_146344_y)
         {
-            this.drawString(this.fontRendererObj, I18n.format("selectWorld.enterSeed", new Object[0]), this.width / 2 - 100, 47, -6250336);
-            this.drawString(this.fontRendererObj, I18n.format("selectWorld.seedInfo", new Object[0]), this.width / 2 - 100, 85, -6250336);
+            FontLoaders.F18.drawString(I18n.format("selectWorld.enterSeed", new Object[0]), this.width / 2 - 100, 47, -Color.GRAY.getRGB());
+            FontLoaders.F18.drawString( I18n.format("selectWorld.seedInfo", new Object[0]), this.width / 2 - 100, 85, -Color.GRAY.getRGB());
 
             if (this.btnMapFeatures.visible)
             {
-                this.drawString(this.fontRendererObj, I18n.format("selectWorld.mapFeatures.info", new Object[0]), this.width / 2 - 150, 122, -6250336);
+                FontLoaders.F18.drawString(I18n.format("selectWorld.mapFeatures.info", new Object[0]), this.width / 2 - 150, 122, -Color.GRAY.getRGB());
             }
 
             if (this.btnAllowCommands.visible)
             {
-                this.drawString(this.fontRendererObj, I18n.format("selectWorld.allowCommands.info", new Object[0]), this.width / 2 - 150, 172, -6250336);
+                FontLoaders.F18.drawString(I18n.format("selectWorld.allowCommands.info", new Object[0]), this.width / 2 - 150, 172,  -Color.GRAY.getRGB());
             }
 
             this.field_146335_h.drawTextBox();
@@ -475,11 +477,11 @@ public class GuiCreateWorld extends GuiScreen
         }
         else
         {
-            this.drawString(this.fontRendererObj, I18n.format("selectWorld.enterName", new Object[0]), this.width / 2 - 100, 47, -6250336);
-            this.drawString(this.fontRendererObj, I18n.format("selectWorld.resultFolder", new Object[0]) + " " + this.field_146336_i, this.width / 2 - 100, 85, -6250336);
+            FontLoaders.F18.drawString(I18n.format("selectWorld.enterName", new Object[0]), this.width / 2 - 100, 47,  -Color.GRAY.getRGB());
+            FontLoaders.F18.drawString(I18n.format("selectWorld.resultFolder", new Object[0]) + " " + this.field_146336_i, this.width / 2 - 100, 85,  -Color.GRAY.getRGB());
             this.field_146333_g.drawTextBox();
-            this.drawString(this.fontRendererObj, this.field_146323_G, this.width / 2 - 100, 137, -6250336);
-            this.drawString(this.fontRendererObj, this.field_146328_H, this.width / 2 - 100, 149, -6250336);
+            FontLoaders.F18.drawString(this.field_146323_G, this.width / 2 - 100, 137,  -Color.GRAY.getRGB());
+            FontLoaders.F18.drawString(this.field_146328_H, this.width / 2 - 100, 149,  -Color.GRAY.getRGB());
         }
 
         super.drawScreen(mouseX, mouseY, partialTicks);
