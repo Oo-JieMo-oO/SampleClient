@@ -92,6 +92,7 @@ import org.lwjgl.input.Mouse;
 import org.lwjgl.opengl.*;
 import org.lwjgl.util.glu.GLU;
 import vip.radium.RadiumClient;
+import vip.radium.config.Config;
 import vip.radium.event.impl.KeyPressEvent;
 import vip.radium.event.impl.game.ClientStartupEvent;
 import vip.radium.event.impl.game.PreClientStartupEvent;
@@ -1055,6 +1056,7 @@ public class Minecraft implements IThreadListener, IPlayerUsage {
      * Called when the window is closing. Sets 'running' to false which allows the game loop to exit cleanly.
      */
     public void shutdown() {
+        RadiumClient.getInstance().getConfigManager().saveConfig("Config");
         this.running = false;
     }
 
