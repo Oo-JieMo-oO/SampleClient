@@ -8,6 +8,8 @@ import net.minecraft.client.renderer.vertex.DefaultVertexFormats;
 import net.minecraft.util.ResourceLocation;
 import org.lwjgl.opengl.GL11;
 
+import static org.lwjgl.opengl.GL11.GL_POLYGON;
+
 public class Gui {
     public static final ResourceLocation optionsBackground = new ResourceLocation("textures/gui/options_background.png");
     public static final ResourceLocation statIcons = new ResourceLocation("textures/gui/container/stats_icons.png");
@@ -89,11 +91,17 @@ public class Gui {
     public static void drawModalRectWithCustomSizedTexture(int x, int y, float u, float v, int width, int height, float textureWidth, float textureHeight) {
         float f = 1.0F / textureWidth;
         float f1 = 1.0F / textureHeight;
-        worldrenderer.begin(7, DefaultVertexFormats.POSITION_TEX);
-        worldrenderer.pos(x, y + height, 0.0D).tex(u * f, (v + height) * f1).endVertex();
-        worldrenderer.pos(x + width, y + height, 0.0D).tex((u + width) * f, (v +  height) * f1).endVertex();
-        worldrenderer.pos(x + width, y, 0.0D).tex((u + width) * f, v * f1).endVertex();
-        worldrenderer.pos(x, y, 0.0D).tex(u * f, v * f1).endVertex();
+        worldrenderer.begin(GL_POLYGON, DefaultVertexFormats.POSITION_TEX);
+        float xRadius = width / 2f;
+        float yRadius = height / 2f;
+        float uRadius = (((u + (float) width) * f) - (u * f)) / 2f;
+        float vRadius = (((v + (float) height) * f1) - (v * f1)) / 2f;
+        for(int i = 0; i <= 360; i+=10) {
+            double xPosOffset = Math.sin(i * Math.PI / 180.0D);
+            double yPosOffset = Math.cos(i * Math.PI / 180.0D);
+            worldrenderer.pos(x + xRadius + xPosOffset * xRadius, y + yRadius + yPosOffset * yRadius, 0)
+                    .tex(u * f + uRadius + xPosOffset * uRadius, v * f1 + vRadius + yPosOffset * vRadius).endVertex();
+        }
         tessellator.draw();
     }
 

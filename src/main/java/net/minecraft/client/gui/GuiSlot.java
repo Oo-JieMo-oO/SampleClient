@@ -9,6 +9,7 @@ import net.minecraft.util.MathHelper;
 import org.lwjgl.input.Mouse;
 import org.lwjgl.opengl.GL11;
 import vip.radium.utils.render.RenderingUtils;
+import vip.xiatian.RoundedUtil;
 
 import java.awt.*;
 
@@ -451,17 +452,14 @@ public abstract class GuiSlot
             {
                 int i1 = this.left + (this.width / 2 - this.getListWidth() / 2);
                 int j1 = this.left + this.width / 2 + this.getListWidth() / 2;
-                int color = new Color(0, 0, 0, 90).getRGB();
-                int radius = 4;
+                Color color = new Color(0, 0, 0, 90);
+                int radius = 2;
                 float xPosition = p_148120_1_ - 3;
                 float yPosition = k - 3;
                 float width = j1 - i1 + 3;
                 float height = l + 6;
-
-                RenderingUtils.drawRoundedCornerRect(xPosition, yPosition, xPosition + width ,
-                        yPosition + height,radius, color);
-                RenderingUtils.drawRoundedCornerRect(xPosition-0.3f, yPosition-0.3f, xPosition + width + 0.3f ,
-                        yPosition + height + 0.3f,radius-1, color);
+                RoundedUtil.drawRound(xPosition,yPosition, width ,
+                        height,radius, color);
             }
 
             if (!(this instanceof GuiResourcePackList) || k >= this.top - this.slotHeight && k <= this.bottom)

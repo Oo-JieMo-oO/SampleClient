@@ -7,6 +7,7 @@ import net.minecraft.client.audio.PositionedSoundRecord;
 import net.minecraft.client.audio.SoundHandler;
 import net.minecraft.util.ResourceLocation;
 import org.lwjgl.opengl.GL11;
+import vip.xiatian.RoundedUtil;
 import vip.xiatian.cnfont.FontLoaders;
 
 import java.awt.*;
@@ -93,7 +94,10 @@ public class GuiButton extends Gui
 //            GlStateManager.blendFunc(770, 771);
 //            Gui.drawTexturedModalRect(this.xPosition, this.yPosition, 0, 46 + i * 20, this.width / 2, this.height);
 //            Gui.drawTexturedModalRect(this.xPosition + this.width / 2, this.yPosition, 200 - this.width / 2, 46 + i * 20, this.width / 2, this.height);
-            Gui.drawRect(this.xPosition, this.yPosition, this.xPosition + this.width, this.yPosition + this.height, 0x78000000);
+            Color color = new Color(0, 0, 0, 90);
+            int radius = 2;
+            RoundedUtil.drawRound(xPosition,yPosition, width ,
+                    height,radius, color);
             if (hovered && enabled) {
                 GL11.glPushMatrix();
                 OGLUtils.enableBlending();

@@ -13,7 +13,10 @@ import net.minecraft.client.renderer.texture.DynamicTexture;
 import net.minecraft.client.resources.I18n;
 import net.optifine.reflect.Reflector;
 import org.lwjgl.opengl.GL11;
+import vip.xiatian.RoundedUtil;
+import vip.xiatian.cnfont.FontLoaders;
 
+import java.awt.*;
 import java.io.IOException;
 
 public class GuiMainMenu extends GuiScreen implements GuiYesNoCallback {
@@ -50,7 +53,6 @@ public class GuiMainMenu extends GuiScreen implements GuiYesNoCallback {
 
         this.buttonList.add(new GuiButton(0, this.width / 2 - 100, j + 72 + 12, 98, 20, I18n.format("menu.options")));
         this.buttonList.add(new GuiButton(4, this.width / 2 + 2, j + 72 + 12, 98, 20, I18n.format("menu.quit")));
-        this.buttonList.add(new GuiButtonLanguage(5, this.width / 2 - 124, j + 72 + 12));
 
         this.mc.func_181537_a(false);
     }
@@ -64,8 +66,6 @@ public class GuiMainMenu extends GuiScreen implements GuiYesNoCallback {
     protected void actionPerformed(GuiButton button) throws IOException {
         if (button.id == 0) {
             this.mc.displayGuiScreen(new GuiOptions(this, this.mc.gameSettings));
-        } else if (button.id == 5) {
-            this.mc.displayGuiScreen(new GuiLanguage(this, this.mc.gameSettings, this.mc.getLanguageManager()));
         } else if (button.id == 1) {
             this.mc.displayGuiScreen(new GuiSelectWorld(this));
         } else if (button.id == 2) {
@@ -84,27 +84,6 @@ public class GuiMainMenu extends GuiScreen implements GuiYesNoCallback {
 
     public void drawScreen(int mouseX, int mouseY, float partialTicks) {
         drawBackground(0);
-
-        String firstChar = String.valueOf(RadiumClient.NAME.charAt(0));
-        String restOfName = RadiumClient.NAME.substring(1);
-
-
-        float scale = 4;
-
-        float firstCharWidth = Wrapper.getMinecraftFontRenderer().getWidth(firstChar);
-        float restOfNameWidth = Wrapper.getMinecraftFontRenderer().getWidth(restOfName);
-
-        float textX = width / 2.0F - (((firstCharWidth + restOfNameWidth) * scale) / 2);
-
-        int textHeight = this.height / 4 - 24;
-
-
-        textX /= scale;
-        textHeight /= scale;
-        float xDiff = ((mouseX - height / 2) - this.currentX) / new ScaledResolution(mc).getScaleFactor();
-        float yDiff = ((mouseY - width / 2)- this.currentY) / new ScaledResolution(mc).getScaleFactor();
-        this.currentX += xDiff * 0.3f;
-        this.currentY += yDiff * 0.3f;
         super.drawScreen(mouseX, mouseY, partialTicks);
     }
 }
