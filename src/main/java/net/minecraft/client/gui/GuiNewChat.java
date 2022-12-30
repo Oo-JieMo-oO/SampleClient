@@ -88,7 +88,7 @@ public class GuiNewChat extends Gui {
                             if (l1 > 3) {
                                 int i2 = 0;
                                 int j2 = -i1 * 9;
-                                if(new BetterChat().ChatAnim.getValue()) {
+                                if(BetterChat.get() &&  new BetterChat().ChatAnim.getValue()) {
 
                                     if (j1 <= 20) {
                                         GL11.glTranslatef((float) (-(l + 4) * RenderingUtils.easeInQuart(1 - ((j1 + mc.getTimer().renderPartialTicks) / 20.0))), 0F, 0F);
@@ -97,7 +97,12 @@ public class GuiNewChat extends Gui {
                                         GL11.glTranslatef((float) (-(l + 4) * RenderingUtils.easeInQuart(((j1 + mc.getTimer().renderPartialTicks) - 170) / 20.0)), 0F, 0F);
                                     }
                                 }
-                                drawRect(i2, j2 - 9, i2 + l + 4, j2, l1 / 2 << 24);
+                                if (BetterChat.get() && new BetterChat().bg.getValue()) {
+
+                                }
+                                            else{
+                                    drawRect(i2, j2 - 9, i2 + l + 4, j2, l1 / 2 << 24);
+                                }
                                 String s = chatline.getChatComponent().getFormattedText();
                                 GlStateManager.enableBlend();
                                 FontLoaders.F18.drawStringWithShadow(s, (float) i2, (float) (j2 - 8), 16777215 + (l1 << 24));
