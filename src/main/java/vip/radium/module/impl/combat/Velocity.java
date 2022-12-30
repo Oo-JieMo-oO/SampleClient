@@ -2,6 +2,7 @@ package vip.radium.module.impl.combat;
 
 import io.github.nevalackin.homoBus.annotations.EventLink;
 import io.github.nevalackin.homoBus.Listener;
+import net.minecraft.client.Minecraft;
 import net.minecraft.network.Packet;
 import net.minecraft.network.play.server.S12PacketEntityVelocity;
 import net.minecraft.network.play.server.S27PacketExplosion;
@@ -13,6 +14,8 @@ import vip.radium.property.impl.DoubleProperty;
 import vip.radium.property.impl.Representation;
 import vip.radium.utils.ServerUtils;
 import vip.radium.utils.Wrapper;
+
+import java.util.concurrent.ThreadLocalRandom;
 
 @ModuleInfo(label = "Velocity", category = ModuleCategory.COMBAT)
 public final class Velocity extends Module {
@@ -26,29 +29,23 @@ public final class Velocity extends Module {
     public final Listener<PacketReceiveEvent> onPacketReceiveEvent = e -> {
         Packet<?> packet = e.getPacket();
         if (packet instanceof S12PacketEntityVelocity) {
-            S12PacketEntityVelocity velocityPacket = (S12PacketEntityVelocity) packet;
-            if (velocityPacket.getEntityID() == Wrapper.getPlayer().getEntityId()) {
-                double verticalPerc = verticalPercentProperty.getValue();
-                double horizontalPerc = horizontalPercentProperty.getValue();
-                if (verticalPerc == 0 && horizontalPerc == 0) {
-                    e.setCancelled();
-                    return;
+            if (((S12PacketEntityVelocity) packet).getEntityID() == Minecraft.getMinecraft().thePlayer.getEntityId()) {
+                S12PacketEntityVelocity velocityPacket = (S12PacketEntityVelocity) packet;
+                if(horizontalPercentProperty.getValue() == 0f && verticalPercentProperty.getValue() == 0f){
+                    e.setCancelled(true);
+                }else{
+                    velocityPacket.motionX *= (horizontalPercentProperty.getValue() / 100);
+                    velocityPacket.motionY *= (verticalPercentProperty.getValue() / 100);
+                    velocityPacket.motionZ *= (horizontalPercentProperty.getValue() / 100);
                 }
-                velocityPacket.motionX *= (horizontalPercentProperty.getValue() / 100);
-                velocityPacket.motionY *= (verticalPercentProperty.getValue() / 100);
-                velocityPacket.motionZ *= (horizontalPercentProperty.getValue() / 100);
             }
-        } else if (packet instanceof S27PacketExplosion && ServerUtils.isOnHypixel()) {
-            double verticalPerc = verticalPercentProperty.getValue();
-            double horizontalPerc = horizontalPercentProperty.getValue();
-            if (verticalPerc == 0 && horizontalPerc == 0) {
-                e.setCancelled();
-                return;
+
+            if (e.getPacket() instanceof S27PacketExplosion) {
+                e.setCancelled(true);
             }
-            S27PacketExplosion packetExplosion = (S27PacketExplosion) packet;
-            packetExplosion.motionX *= (horizontalPercentProperty.getValue() / 100);
-            packetExplosion.motionY *= (verticalPercentProperty.getValue() / 100);
-            packetExplosion.motionZ *= (horizontalPercentProperty.getValue() / 100);
+        }
+        if(e.getPacket() instanceof S27PacketExplosion){
+            e.setCancelled(true);
         }
     };
 }

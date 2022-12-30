@@ -1,58 +1,66 @@
 package vip.radium.module.impl.movement;
 
+
 import io.github.nevalackin.homoBus.annotations.EventLink;
 import io.github.nevalackin.homoBus.Listener;
+import net.minecraft.client.Minecraft;
 import net.minecraft.network.play.client.C03PacketPlayer;
-import vip.radium.event.impl.player.UpdatePositionEvent;
+import vip.radium.event.impl.packet.PacketReceiveEvent;
 import vip.radium.module.Module;
 import vip.radium.module.ModuleCategory;
 import vip.radium.module.ModuleInfo;
-import vip.radium.module.ModuleManager;
 import vip.radium.property.impl.DoubleProperty;
 import vip.radium.property.impl.EnumProperty;
 import vip.radium.property.impl.Representation;
 import vip.radium.utils.MovementUtils;
-import vip.radium.utils.TimerUtil;
-import vip.radium.utils.Wrapper;
+import vip.xiatian.TimeHelper;
+
+import java.util.ArrayList;
 
 @ModuleInfo(label = "Anti Fall", category = ModuleCategory.MOVEMENT)
 public final class AntiFall extends Module {
 
-    private final TimerUtil timer = new TimerUtil();
-
+    public static TimeHelper timer = new TimeHelper();
+    private DoubleProperty pullbackTime =new  DoubleProperty("pullbacktime",1000.0,1000.0,2000.0,100.0, Representation.DISTANCE);
     private final EnumProperty<NoVoidMode> noVoidModeProperty = new EnumProperty<>("Mode", NoVoidMode.PACKET);
-    private final DoubleProperty distProperty = new DoubleProperty("Distance", 5.0, 3.0, 10.0,
-            0.5, Representation.DISTANCE);
 
+    public double[] lastGroundPos = new double[3];
     public AntiFall() {
         setSuffixListener(noVoidModeProperty);
     }
-
+    public static ArrayList<C03PacketPlayer> packets = new ArrayList<>();
+    public static boolean isInVoid() {
+        for (int i = 0; i <= 128; i++) {
+            if (MovementUtils.isOnGround2(i)) {
+                return false;
+            }
+        }
+        return true;
+    }
     @EventLink
-    public final Listener<UpdatePositionEvent> onUpdatePositionEvent = event -> {
-        if (event.isPre()) {
-            if (!ModuleManager.getInstance(Flight.class).isEnabled() &&
-                    Wrapper.getPlayer().fallDistance > distProperty.getValue().floatValue() &&
-                    !MovementUtils.isOnGround() &&
-                    timer.hasElapsed(500L) &&
-                    MovementUtils.isOverVoid()) {
-                switch (noVoidModeProperty.getValue()) {
-                    case PACKET:
-                        Wrapper.sendPacketDirect(
-                                new C03PacketPlayer.C06PacketPlayerPosLook(
-                                        event.getPosX(),
-                                        event.getPosY() + 11.0 + StrictMath.random(),
-                                        event.getPosZ(),
-                                        event.getYaw(),
-                                        event.getPitch(),
-                                        false));
-                        break;
-                    case MOTION:
-                        if (Wrapper.getPlayer().motionY < 0.0F)
-                            Wrapper.getPlayer().motionY = 2.2F;
-                        break;
+    public final Listener<PacketReceiveEvent> onpacketPositionEvent = event -> {
+        if (!packets.isEmpty() && Minecraft.getMinecraft().thePlayer.ticksExisted < 100)
+            packets.clear();
+
+        if (event.getPacket() instanceof C03PacketPlayer) {
+            C03PacketPlayer packet = ((C03PacketPlayer) event.getPacket());
+            if (isInVoid()) {
+                event.setCancelled(true);
+                packets.add(packet);
+
+                if (timer.isDelayComplete(pullbackTime.getValue())) {
+                    Minecraft.getMinecraft().getNetHandler().getNetworkManager().sendPacket(new C03PacketPlayer.C04PacketPlayerPosition(lastGroundPos[0], lastGroundPos[1] - 1, lastGroundPos[2], true));
                 }
-                Wrapper.getPlayer().fallDistance = 0.0f;
+            } else {
+                lastGroundPos[0] = Minecraft.getMinecraft().thePlayer.posX;
+                lastGroundPos[1] = Minecraft.getMinecraft().thePlayer.posY;
+                lastGroundPos[2] = Minecraft.getMinecraft().thePlayer.posZ;
+
+                if (!packets.isEmpty()) {
+                    for (C03PacketPlayer p : packets)
+                       Minecraft.getMinecraft().getNetHandler().getNetworkManager().sendPacket(p);
+                    packets.clear();
+                }
                 timer.reset();
             }
         }

@@ -7,7 +7,6 @@ import net.minecraft.client.audio.PositionedSoundRecord;
 import net.minecraft.client.audio.SoundHandler;
 import net.minecraft.util.ResourceLocation;
 import org.lwjgl.opengl.GL11;
-import vip.radium.utils.render.RenderingUtils;
 
 public class GuiButton extends Gui
 {

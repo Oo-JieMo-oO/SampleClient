@@ -13,13 +13,11 @@ import vip.radium.event.impl.packet.PacketReceiveEvent;
 import vip.radium.module.Module;
 import vip.radium.module.ModuleCategory;
 import vip.radium.module.ModuleInfo;
-import vip.radium.property.Property;
 import vip.radium.utils.Wrapper;
 
 @ModuleInfo(label = "Better Chat", category = ModuleCategory.MISCELLANEOUS)
 public final class BetterChat extends Module {
-    public final Property<Boolean> bg = new Property<>("BackGround", true);
-    public final Property<Boolean> ChatAnim = new Property<>("ChatAnim", true);
+
     private String lastMessage = "";
     private int amount;
     private int line;

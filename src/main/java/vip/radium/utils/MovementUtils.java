@@ -1,6 +1,7 @@
 package vip.radium.utils;
 
 import net.minecraft.block.*;
+import net.minecraft.client.Minecraft;
 import net.minecraft.client.entity.EntityPlayerSP;
 import net.minecraft.network.play.client.C03PacketPlayer;
 import net.minecraft.potion.Potion;
@@ -28,7 +29,13 @@ public final class MovementUtils {
 
     private MovementUtils() {
     }
-
+    public static boolean isOnGround2(double height) {
+        if (!Minecraft.getMinecraft().theWorld.getCollidingBoundingBoxes(Minecraft.getMinecraft().thePlayer,Minecraft.getMinecraft().thePlayer.getEntityBoundingBox().offset(0.0D, -height, 0.0D)).isEmpty()) {
+            return true;
+        } else {
+            return false;
+        }
+    }
     public static final double BUNNY_SLOPE = 0.72;
     public static final double SPRINTING_MOD = 1.3F;
     public static final double SNEAK_MOD = 0.3F;

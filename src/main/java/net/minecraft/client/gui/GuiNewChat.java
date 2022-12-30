@@ -1,8 +1,6 @@
 package net.minecraft.client.gui;
 
 import com.google.common.collect.Lists;
-import vip.radium.module.ModuleManager;
-import vip.radium.module.impl.misc.BetterChat;
 import vip.radium.utils.render.RenderingUtils;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.GlStateManager;
@@ -55,13 +53,11 @@ public class GuiNewChat extends Gui {
                     flag = true;
                 }
 
-
                 float f1 = this.getChatScale();
                 int l = MathHelper.ceiling_float_int((float) this.getChatWidth() / f1);
                 GL11.glPushMatrix();
                 GL11.glTranslatef(2.0F, 20.0F, 0.0F);
                 GL11.glScalef(f1, f1, 1.0F);
-
 
                 for (int i1 = 0; i1 + this.scrollPos < this.field_146253_i.size() && i1 < i; ++i1) {
                     ChatLine chatline = this.field_146253_i.get(i1 + this.scrollPos);
@@ -87,18 +83,7 @@ public class GuiNewChat extends Gui {
                             if (l1 > 3) {
                                 int i2 = 0;
                                 int j2 = -i1 * 9;
-                                if(new BetterChat().ChatAnim.getValue()) {
-
-                                    if (j1 <= 20) {
-                                        GL11.glTranslatef((float) (-(l + 4) * RenderingUtils.easeInQuart(1 - ((j1 + mc.getTimer().renderPartialTicks) / 20.0))), 0F, 0F);
-                                    }
-                                    if (j1 >= 180) {
-                                        GL11.glTranslatef((float) (-(l + 4) * RenderingUtils.easeInQuart(((j1 + mc.getTimer().renderPartialTicks) - 170) / 20.0)), 0F, 0F);
-                                    }
-                                }
-                                if (new BetterChat().bg.getValue()) {
-                                    drawRect(i2, j2 - 9, i2 + l + 4, j2, l1 / 2 << 24);
-                                }
+                                drawRect(i2, j2 - 9, i2 + l + 4, j2, l1 / 2 << 24);
                                 String s = chatline.getChatComponent().getFormattedText();
                                 GlStateManager.enableBlend();
                                 this.mc.fontRendererObj.drawStringWithShadow(s, (float) i2, (float) (j2 - 8), 16777215 + (l1 << 24));

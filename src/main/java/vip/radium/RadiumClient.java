@@ -4,6 +4,7 @@ import com.thealtening.auth.service.AlteningServiceType;
 import io.github.nevalackin.homoBus.Listener;
 import io.github.nevalackin.homoBus.annotations.EventLink;
 import io.github.nevalackin.homoBus.bus.impl.EventBus;
+import net.minecraft.client.Minecraft;
 import vip.radium.alt.AltManager;
 import vip.radium.command.CommandManager;
 import vip.radium.config.ConfigManager;
@@ -74,7 +75,6 @@ public final class RadiumClient {
     private RadiumClient() {
         getEventBus().subscribe(this);
     }
-
     @EventLink
     public final Listener<ClientStartupEvent> onClientStart = e -> {
         setGLHints();
