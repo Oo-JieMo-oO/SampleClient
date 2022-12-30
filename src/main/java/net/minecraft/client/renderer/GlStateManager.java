@@ -418,7 +418,16 @@ public class GlStateManager {
             GL11.glClear(mask);
         }
     }
+    public static void color(float p_color_0_, float p_color_1_, float p_color_2_, float p_color_3_) {
+        if (p_color_0_ != colorState.red || p_color_1_ != colorState.green || p_color_2_ != colorState.blue || p_color_3_ != colorState.alpha) {
+            colorState.red = p_color_0_;
+            colorState.green = p_color_1_;
+            colorState.blue = p_color_2_;
+            colorState.alpha = p_color_3_;
+            GL11.glColor4f(p_color_0_, p_color_1_, p_color_2_, p_color_3_);
+        }
 
+    }
     public static void getFloat(int pname, FloatBuffer params) {
         GL11.glGetFloat(pname, params);
     }

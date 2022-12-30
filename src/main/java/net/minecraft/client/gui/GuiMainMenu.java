@@ -1,7 +1,11 @@
 package net.minecraft.client.gui;
 
+import net.minecraft.client.renderer.GlStateManager;
+import net.minecraft.util.ResourceLocation;
 import vip.radium.RadiumClient;
 import vip.radium.gui.alt.impl.GuiAltManager;
+import vip.radium.gui.font.FontManager;
+import vip.radium.gui.font.FontRenderer;
 import vip.radium.utils.Wrapper;
 import vip.radium.utils.render.Colors;
 import vip.radium.utils.render.RenderingUtils;
@@ -14,6 +18,8 @@ import java.io.IOException;
 
 public class GuiMainMenu extends GuiScreen implements GuiYesNoCallback {
     private GuiButton buttonResetDemo;
+    float currentX = 0f;
+    float currentY = 0f;
     private DynamicTexture viewportTexture;
 
     /**
@@ -75,11 +81,13 @@ public class GuiMainMenu extends GuiScreen implements GuiYesNoCallback {
         }
     }
 
+
     public void drawScreen(int mouseX, int mouseY, float partialTicks) {
         RenderingUtils.drawGuiBackground(width, height);
 
         String firstChar = String.valueOf(RadiumClient.NAME.charAt(0));
         String restOfName = RadiumClient.NAME.substring(1);
+
 
         float scale = 4;
 
@@ -87,15 +95,27 @@ public class GuiMainMenu extends GuiScreen implements GuiYesNoCallback {
         float restOfNameWidth = Wrapper.getMinecraftFontRenderer().getWidth(restOfName);
 
         float textX = width / 2.0F - (((firstCharWidth + restOfNameWidth) * scale) / 2);
+
         int textHeight = this.height / 4 - 24;
+
 
         textX /= scale;
         textHeight /= scale;
-        GL11.glScaled(scale, scale, 1);
+        float xDiff = ((mouseX - height / 2) - this.currentX) / new ScaledResolution(mc).getScaleFactor();
+        float yDiff = ((mouseY - width / 2)- this.currentY) / new ScaledResolution(mc).getScaleFactor();
+        this.currentX += xDiff * 0.3f;
+        this.currentY += yDiff * 0.3f;
 
+        //BackGround
+        GL11.glTranslated(this.currentX / 30.0f, this.currentY / 15.0f, 0.0f);
+        RenderingUtils.drawImage(-30, -30, width + 60, height + 60, 1.0f, 1.0f, 1.0f, new ResourceLocation("radium/gui/bg.png"));
+        GL11.glTranslated(-this.currentX / 30.0f, -this.currentY / 15.0f, 0.0f);
+
+        //Logi
+        GL11.glScaled(scale, scale, 1);
+//        FontManager.FN_FR.drawStringWithShadow(RadiumClient.NAME, textX, textHeight, Colors.DEEP_PURPLE);
         Wrapper.getMinecraftFontRenderer().drawStringWithShadow(RadiumClient.NAME,
                 textX, textHeight, Colors.DEEP_PURPLE);
-
         GL11.glScaled(1 / scale, 1 / scale, 1);
 
 //        ChangeLogUtils.drawChangeLog();
