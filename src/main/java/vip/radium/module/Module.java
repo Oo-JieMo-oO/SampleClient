@@ -3,6 +3,7 @@ package vip.radium.module;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonPrimitive;
+import net.minecraft.client.Minecraft;
 import vip.radium.RadiumClient;
 import vip.radium.config.Serializable;
 import vip.radium.property.Property;
@@ -18,7 +19,7 @@ import java.util.List;
 import java.util.function.Supplier;
 
 public class Module extends Manager<Property<?>> implements Toggleable, Serializable {
-
+    public Minecraft mc = Minecraft.getMinecraft();
     private final String label = getClass().getAnnotation(ModuleInfo.class).label();
     private final String description = getClass().getAnnotation(ModuleInfo.class).description();
     private final ModuleCategory category = getClass().getAnnotation(ModuleInfo.class).category();

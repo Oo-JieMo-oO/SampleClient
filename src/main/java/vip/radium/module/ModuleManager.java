@@ -85,7 +85,8 @@ public final class ModuleManager {
                 new NoRotate(),
                 new AutoTool(),
                 new InventoryManager(),
-                new NoFall());
+                new NoFall(),
+                new FastPlace());
 
         getModules().forEach(Module::reflectProperties);
 
